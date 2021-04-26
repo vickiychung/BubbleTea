@@ -1,0 +1,24 @@
+{
+  "name": "naughtypaw",
+  "version": "1.0.0",
+  "description": "Simple game of a naughty cat stashing away items.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vickiychung/NaughtyPaw.git"
+  },
+  "author": "Vicki Chung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vickiychung/NaughtyPaw/issues"
+  },
+  "homepage": "https://github.com/vickiychung/NaughtyPaw#readme",
+  "dependencies": {
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
+  }
+}
