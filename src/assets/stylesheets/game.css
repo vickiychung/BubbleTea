@@ -1,5 +1,7 @@
 body {
   background-color: pink;
+  display: flex;
+  justify-content: center;
 }
 
 #game-canvas {
