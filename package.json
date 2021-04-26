@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vickiychung/NaughtyPaw#readme",
   "dependencies": {
+    "file-loader": "^6.2.0",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0"
   }
