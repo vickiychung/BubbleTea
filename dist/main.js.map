@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://naughtypaw/./src/index.js"],"names":[],"mappings":";;;;;AAAA;AACA;AACA,CAAC","file":"main.js","sourcesContent":["document.addEventListener(\"DOMContentLoaded\", () => {\n  console.log(\"Webpack is working!\")\n});\n"],"sourceRoot":""}
