@@ -1,9 +1,9 @@
 body {
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
   justify-content: center;
 }
 
 #game-canvas {
-  background-color: beige;
+  /* background-color: beige; */
 }
