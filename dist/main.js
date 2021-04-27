@@ -30,12 +30,9 @@ class Cat {
   }
 
   moveCat(dir) {
-    if (dir === 1) {
-      this.x += 3;
-    } else {
-      this.x -= 3;
-    }
+    this.x += dir;
   }
+
 }
 
 module.exports = Cat;
@@ -57,56 +54,72 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
-    this.registerEvents();
-    this.restart();
+
+    // this.update = () => {
+    //   Game.clear();
+    //   this.restart();
+    // }
+
+    // this.registerEvents();
+    // this.restart();
+    this.play(0);
   }
 
-  play() {
+  play(dir) {
     this.playing = true;
-    this.animate();
-  }
-
-  restart() {
     this.cat = new Cat(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
-    this.animate();
+    this.animate(dir);
   }
 
-  registerEvents() {
-    this.boundLeftClickHandler = this.leftClick.bind(this);
-    this.boundRightClickHandler = this.rightClick.bind(this);
+  // restart(dir) {
+  //   this.cat = new Cat(this.dimensions);
+  //   this.sofa = new Sofa(this.dimensions);
+  //   this.table = new Table(this.dimensions);
+  //   this.animate(dir);
+  // }
 
-    const leftButton = document.getElementById("left-button");
-    const rightButton = document.getElementById("right-button")
-    leftButton.addEventListener("mousedown", this.boundLeftClickHandler);
-    rightButton.addEventListener("mousedown", this.boundRightClickHandler);
-    // this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-  }
+  // registerEvents() {
+  //   this.boundLeftClickHandler = this.leftClick.bind(this);
+  //   this.boundRightClickHandler = this.rightClick.bind(this);
 
-  leftClick(e) {
-    if (!this.playing) {
-      this.play();
-    }
-    this.dir = -1;
-  }
+  //   const leftButton = document.getElementById("left-button");
+  //   const rightButton = document.getElementById("right-button")
+  //   leftButton.addEventListener("mousedown", this.boundLeftClickHandler);
+  //   rightButton.addEventListener("mousedown", this.boundRightClickHandler);
+  // }
 
-  rightClick(e) {
-    if (!this.playing) {
-      this.play();
-    }
-    this.dir = 1;
-  }
+  // leftClick(e) {
+  //   if (!this.playing) {
+  //     this.play();
+  //   }
+  //   this.dir = -1;
+
+  //   console.log("left")
+
+  //   // this.update();
+  // }
+
+  // rightClick(e) {
+  //   if (!this.playing) {
+  //     this.play();
+  //   }
+  //   this.dir = 1;
+
+  //   console.log("right")
+
+  //   // this.update();
+  // }
   
-  animate() {
+  animate(dir) {
+    this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
-    this.cat.animate(this.ctx, this.dir);
-
-     if (this.playing) {
-      requestAnimationFrame(this.animate.bind(this));
-    }
+    this.cat.animate(this.ctx, dir);
   }
+
+  
 }
 
 module.exports = Game;
@@ -210,7 +223,36 @@ const Game = __webpack_require__(/*! ./classes/game */ "./src/classes/game.js");
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
 
-  new Game(canvas);
+  const game = new Game(canvas);
+  let dir = 0, pause = false;
+  loop();
+
+  const leftButton = document.getElementById("left-button");
+  const rightButton = document.getElementById("right-button");
+  const pauseButton = document.getElementById("pause-button");
+
+  leftButton.addEventListener("mousedown", e => {
+    dir = -1;
+  });
+
+  rightButton.addEventListener("mousedown", e => {
+    dir = 1;
+  })
+
+  pauseButton.addEventListener("mousedown", e => {
+    pause = !pause;
+    loop();
+  })
+
+  function loop() {
+    if (pause) {
+      return cancelAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+    game.animate(dir);
+  } 
+
 });
 
 console.log("Webpack is working!")

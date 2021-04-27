@@ -21,12 +21,9 @@ class Cat {
   }
 
   moveCat(dir) {
-    if (dir === 1) {
-      this.x += 3;
-    } else {
-      this.x -= 3;
-    }
+    this.x += dir;
   }
+
 }
 
 module.exports = Cat;
