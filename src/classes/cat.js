@@ -10,13 +10,22 @@ class Cat {
     this.y = this.dimensions.height / 2;
   }
 
-  animate(ctx) {
+  animate(ctx, dir) {
+    this.moveCat(dir);
     this.drawCat(ctx);
   }
 
   drawCat(ctx){
     ctx.fillStyle = "orange";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
+  }
+
+  moveCat(dir) {
+    if (dir === 1) {
+      this.x += 3;
+    } else {
+      this.x -= 3;
+    }
   }
 }
 

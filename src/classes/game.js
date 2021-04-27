@@ -6,6 +6,7 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
+    this.dir = 1;
     this.restart();
   }
 
@@ -19,7 +20,7 @@ class Game {
   animate() {
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
-    this.cat.animate(this.ctx);
+    this.cat.animate(this.ctx, this.dir);
   }
 }
 

@@ -19,13 +19,22 @@ class Cat {
     this.y = this.dimensions.height / 2;
   }
 
-  animate(ctx) {
+  animate(ctx, dir) {
+    this.moveCat(dir);
     this.drawCat(ctx);
   }
 
   drawCat(ctx){
     ctx.fillStyle = "orange";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
+  }
+
+  moveCat(dir) {
+    if (dir === 1) {
+      this.x += 3;
+    } else {
+      this.x -= 3;
+    }
   }
 }
 
@@ -48,6 +57,7 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
+    this.dir = 1;
     this.restart();
   }
 
@@ -61,7 +71,7 @@ class Game {
   animate() {
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
-    this.cat.animate(this.ctx);
+    this.cat.animate(this.ctx, this.dir);
   }
 }
 
