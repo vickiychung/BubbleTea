@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const game = new Game(canvas);
   let dirCat = 0, pause = true;
   // loop();
+  requestAnimationFrame(loop);
+  // randomTurn();
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
-  // const pauseButton = document.getElementById("pause-button");
+  // const playButton = document.getElementById("play-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -1;
@@ -21,21 +23,44 @@ document.addEventListener("DOMContentLoaded", () => {
     dirCat = 1;
     pause = !pause;
     loop();
-  })
+  });
 
-  // pauseButton.addEventListener("mousedown", e => {
-  //   pause = !pause;
+  // playButton.addEventListener("mousedown", e => {
+  //   pause = false;
   //   loop();
   // })
 
+  // function randomTurn() {
+  //    console.log(turnHuman);
+
+  //   const min = 3, max = 5;
+  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
+  //   turnHuman = !turnHuman;
+  //   window.setTimeout(randomTurn(), rand * 1000);
+  // }
+
+  function timestamp() {
+    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+  }
+
+  let now, dt = 0, last = timestamp(), step = 1/60;
+
   function loop() {
-    console.log(pause);
     if (pause) {
       return cancelAnimationFrame(loop);
     }
 
+    now = timestamp();
+    dt = dt + Math.min(1, (now - last) / 1000);
+    while (dt > step) {
+      dt = dt - step;
+    }
+
+    game.animate(dirCat, dt);
+
+    last = now;
+
     requestAnimationFrame(loop);
-    game.animate(dirCat);
   } 
 
 });

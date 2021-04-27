@@ -28,12 +28,12 @@ class Game {
   //   this.animate(dir);
   // }
   
-  animate(dirCat) {
+  animate(dirCat, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
-    this.human.animate(this.ctx);
+    this.human.animate(this.ctx, dt);
   }
 
   

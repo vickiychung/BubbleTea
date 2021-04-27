@@ -76,12 +76,12 @@ class Game {
   //   this.animate(dir);
   // }
   
-  animate(dirCat) {
+  animate(dirCat, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
-    this.human.animate(this.ctx);
+    this.human.animate(this.ctx, dt);
   }
 
   
@@ -110,14 +110,32 @@ class Human {
     this.y = 0 + dimensions.height / 2 + 20;
   }
 
-  animate(ctx, dir) {
+  animate(ctx, dt) {
+    console.log(dt);
     this.drawHuman(ctx);
+
+    // this.randomTurn(ctx);
   }
 
   drawHuman(ctx) {
-    ctx.fillStyle = "pink";
+    ctx.fillStyle = "black";
     ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
   }
+
+  moveHuman(ctx) {
+    const colors = ["black", "pink"];
+    let rand = Math.floor(Math.random() * 2);
+    let randColor = colors[rand];
+
+    ctx.fillStyle = randColor;
+    ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+  }
+
+  // randomTurn(ctx) {
+  //   const min = 3, max = 5;
+  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
+  //   window.setTimeout(this.moveHuman(ctx), rand * 1000000000000000);
+  // }
 }
 
 module.exports = Human;
@@ -224,10 +242,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const game = new Game(canvas);
   let dirCat = 0, pause = true;
   // loop();
+  requestAnimationFrame(loop);
+  // randomTurn();
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
-  // const pauseButton = document.getElementById("pause-button");
+  // const playButton = document.getElementById("play-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -1;
@@ -239,21 +259,44 @@ document.addEventListener("DOMContentLoaded", () => {
     dirCat = 1;
     pause = !pause;
     loop();
-  })
+  });
 
-  // pauseButton.addEventListener("mousedown", e => {
-  //   pause = !pause;
+  // playButton.addEventListener("mousedown", e => {
+  //   pause = false;
   //   loop();
   // })
 
+  // function randomTurn() {
+  //    console.log(turnHuman);
+
+  //   const min = 3, max = 5;
+  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
+  //   turnHuman = !turnHuman;
+  //   window.setTimeout(randomTurn(), rand * 1000);
+  // }
+
+  function timestamp() {
+    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+  }
+
+  let now, dt = 0, last = timestamp(), step = 1/60;
+
   function loop() {
-    console.log(pause);
     if (pause) {
       return cancelAnimationFrame(loop);
     }
 
+    now = timestamp();
+    dt = dt + Math.min(1, (now - last) / 1000);
+    while (dt > step) {
+      dt = dt - step;
+    }
+
+    game.animate(dirCat, dt);
+
+    last = now;
+
     requestAnimationFrame(loop);
-    game.animate(dirCat);
   } 
 
 });
