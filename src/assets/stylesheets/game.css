@@ -1,9 +1,10 @@
 body {
-  /* background-color: pink; */
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
 #game-canvas {
-  /* background-color: beige; */
+  background-color: beige;
 }

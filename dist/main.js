@@ -41,6 +41,7 @@ module.exports = Cat;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Cat = __webpack_require__(/*! ./cat */ "./src/classes/cat.js");
+const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 
 class Game {
   constructor(canvas) {
@@ -51,15 +52,46 @@ class Game {
 
   restart() {
     this.cat = new Cat(this.dimensions);
+    this.sofa = new Sofa(this.dimensions);
     this.animate();
   }
 
   animate() {
+    this.sofa.drawSofa(this.ctx);
     this.cat.animate(this.ctx);
   }
 }
 
 module.exports = Game;
+
+
+/***/ }),
+
+/***/ "./src/classes/sofa.js":
+/*!*****************************!*\
+  !*** ./src/classes/sofa.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  SOFA_WIDTH: 50,
+  SOFA_HEIGHT: 130
+};
+
+class Sofa {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH;
+    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT;
+  }
+
+  drawSofa(ctx) {
+    ctx.fillStyle = "#484848";
+    ctx.fillRect(this.x, this.y, CONSTANTS.SOFA_WIDTH, CONSTANTS.SOFA_HEIGHT);
+  }
+}
+
+module.exports = Sofa;
 
 
 /***/ })

@@ -1,4 +1,5 @@
 const Cat = require("./cat");
+const Sofa = require("./sofa");
 
 class Game {
   constructor(canvas) {
@@ -9,10 +10,12 @@ class Game {
 
   restart() {
     this.cat = new Cat(this.dimensions);
+    this.sofa = new Sofa(this.dimensions);
     this.animate();
   }
 
   animate() {
+    this.sofa.drawSofa(this.ctx);
     this.cat.animate(this.ctx);
   }
 }
