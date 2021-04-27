@@ -1,20 +1,20 @@
-export const throttle = (func, interval) => {
-  let timeout;
+// export const throttle = (func, interval) => {
+//   let timeout;
 
-  return function() {
-   let context = this;
-   let args = arguments;
-   let callback = function () {
-      timeout = false;
-    };
+//   return function() {
+//    let context = this;
+//    let args = arguments;
+//    let callback = function () {
+//       timeout = false;
+//     };
 
-    if (!timeout) {
-      func.apply(context, args);
-      timeout = true;
-      setTimeout(callback, interval);
-    }
-  }
-}
+//     if (!timeout) {
+//       func.apply(context, args);
+//       timeout = true;
+//       setTimeout(callback, interval);
+//     }
+//   }
+// }
 
 // const throttleFunction=(func, delay)=>{
   
