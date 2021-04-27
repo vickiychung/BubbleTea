@@ -1,4 +1,5 @@
 const Cat = require("./cat");
+const Human = require("./human");
 const Sofa = require("./sofa");
 const Table = require("./table");
 
@@ -11,12 +12,13 @@ class Game {
     this.play(0);
   }
 
-  play(dir) {
+  play(dirCat) {
     this.playing = true;
     this.cat = new Cat(this.dimensions);
+    this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
-    this.animate(dir);
+    this.animate(dirCat);
   }
 
   // restart(dir) {
@@ -26,11 +28,12 @@ class Game {
   //   this.animate(dir);
   // }
   
-  animate(dir) {
+  animate(dirCat) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
-    this.cat.animate(this.ctx, dir);
+    this.cat.animate(this.ctx, dirCat);
+    this.human.animate(this.ctx);
   }
 
   

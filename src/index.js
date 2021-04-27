@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
 
   const game = new Game(canvas);
-  let dir = 0, pause = true;
+  let dirCat = 0, pause = true;
   // loop();
 
   const leftButton = document.getElementById("left-button");
@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // const pauseButton = document.getElementById("pause-button");
 
   leftButton.addEventListener("mousedown", e => {
-    dir = -1;
+    dirCat = -1;
     pause = !pause;
     loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dir = 1;
+    dirCat = 1;
     pause = !pause;
     loop();
   })
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     requestAnimationFrame(loop);
-    game.animate(dir);
+    game.animate(dirCat);
   } 
 
 });

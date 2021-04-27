@@ -47,6 +47,7 @@ module.exports = Cat;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Cat = __webpack_require__(/*! ./cat */ "./src/classes/cat.js");
+const Human = __webpack_require__(/*! ./human */ "./src/classes/human.js");
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
 
@@ -59,12 +60,13 @@ class Game {
     this.play(0);
   }
 
-  play(dir) {
+  play(dirCat) {
     this.playing = true;
     this.cat = new Cat(this.dimensions);
+    this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
-    this.animate(dir);
+    this.animate(dirCat);
   }
 
   // restart(dir) {
@@ -74,17 +76,51 @@ class Game {
   //   this.animate(dir);
   // }
   
-  animate(dir) {
+  animate(dirCat) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
-    this.cat.animate(this.ctx, dir);
+    this.cat.animate(this.ctx, dirCat);
+    this.human.animate(this.ctx);
   }
 
   
 }
 
 module.exports = Game;
+
+
+/***/ }),
+
+/***/ "./src/classes/human.js":
+/*!******************************!*\
+  !*** ./src/classes/human.js ***!
+  \******************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  HUMAN_WIDTH: 30,
+  HUMAN_HEIGHT: 35
+};
+
+class Human {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = 10;
+    this.y = 0 + dimensions.height / 2 + 20;
+  }
+
+  animate(ctx, dir) {
+    this.drawHuman(ctx);
+  }
+
+  drawHuman(ctx) {
+    ctx.fillStyle = "pink";
+    ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+  }
+}
+
+module.exports = Human;
 
 
 /***/ }),
@@ -186,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
 
   const game = new Game(canvas);
-  let dir = 0, pause = true;
+  let dirCat = 0, pause = true;
   // loop();
 
   const leftButton = document.getElementById("left-button");
@@ -194,13 +230,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // const pauseButton = document.getElementById("pause-button");
 
   leftButton.addEventListener("mousedown", e => {
-    dir = -1;
+    dirCat = -1;
     pause = !pause;
     loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dir = 1;
+    dirCat = 1;
     pause = !pause;
     loop();
   })
@@ -217,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     requestAnimationFrame(loop);
-    game.animate(dir);
+    game.animate(dirCat);
   } 
 
 });
