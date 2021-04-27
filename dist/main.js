@@ -15,7 +15,7 @@ const CONSTANTS = {
 class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width / 3;
+    this.x = this.dimensions.width / 2;
     this.y = this.dimensions.height / 2;
   }
 
@@ -42,6 +42,7 @@ module.exports = Cat;
 
 const Cat = __webpack_require__(/*! ./cat */ "./src/classes/cat.js");
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
+const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
 
 class Game {
   constructor(canvas) {
@@ -53,11 +54,13 @@ class Game {
   restart() {
     this.cat = new Cat(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
+    this.table = new Table(this.dimensions);
     this.animate();
   }
 
   animate() {
     this.sofa.drawSofa(this.ctx);
+    this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx);
   }
 }
@@ -92,6 +95,35 @@ class Sofa {
 }
 
 module.exports = Sofa;
+
+
+/***/ }),
+
+/***/ "./src/classes/table.js":
+/*!******************************!*\
+  !*** ./src/classes/table.js ***!
+  \******************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  TABLE_WIDTH: 50,
+  TABLE_HEIGHT: 50
+};
+
+class Table {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = 0;
+    this.y = this.dimensions.height / 3;
+  }
+
+  drawTable(ctx) {
+    ctx.fillStyle = "brown";
+    ctx.fillRect(this.x, this.y, CONSTANTS.TABLE_WIDTH, CONSTANTS.TABLE_HEIGHT);
+  }
+}
+
+module.exports = Table;
 
 
 /***/ })
