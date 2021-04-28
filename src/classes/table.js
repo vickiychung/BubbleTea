@@ -7,7 +7,7 @@ class Table {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = 0;
-    this.y = this.dimensions.height / 3;
+    this.y = this.dimensions.height / 6;
   }
 
   drawTable(ctx) {

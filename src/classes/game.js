@@ -38,11 +38,6 @@ class Game {
     this.human.animate(this.ctx, dt);
 
     this.catPause = catPause;
-
-    // if (this.lost()) {
-    //   alert("Game over!");
-    //   this.play(0);
-    // }
   }
 
   

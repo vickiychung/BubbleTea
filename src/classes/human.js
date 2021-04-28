@@ -7,13 +7,13 @@ class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = 10;
-    this.y = 0 + dimensions.height / 2 + 20;
+    this.y = dimensions.height / 2 - 10;
     this.color = "black";
   }
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-    
+
     if (Math.floor(dt * 1000) === 20) {
       this.moveHuman();
     }
