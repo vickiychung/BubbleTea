@@ -1,6 +1,43 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/classes/angryHuman.js":
+/*!***********************************!*\
+  !*** ./src/classes/angryHuman.js ***!
+  \***********************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  HUMAN_WIDTH: 30,
+  HUMAN_HEIGHT: 35
+};
+
+const angryHumanImg = new Image();
+angryHumanImg.src = './assets/images/angryHuman.png';
+// img attribution
+// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+class angryHuman {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = 10;
+    this.y = dimensions.height / 2 - 10;
+    this.img = angryHumanImg;
+    this.status = "angry";
+  }
+
+  drawHuman(ctx) {
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+  }
+}
+
+module.exports = angryHuman;
+
+
+/***/ }),
+
 /***/ "./src/classes/cat.js":
 /*!****************************!*\
   !*** ./src/classes/cat.js ***!
@@ -52,6 +89,7 @@ module.exports = Cat;
 
 const Cat = __webpack_require__(/*! ./cat */ "./src/classes/cat.js");
 const Human = __webpack_require__(/*! ./human */ "./src/classes/human.js");
+const angryHuman = __webpack_require__(/*! ./angryHuman */ "./src/classes/angryHuman.js");
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
 const Item = __webpack_require__(/*! ./item */ "./src/classes/item.js");
@@ -91,6 +129,11 @@ class Game {
 
   lost() {
     return (!this.catPause && this.human.status === "checking");
+  }
+
+  angry() {
+    this.human = new angryHuman(this.dimensions);
+    this.human.drawHuman(this.ctx);
   }
 
   restart() {
@@ -350,27 +393,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
+    if (game.lost()) {
+      game.angry();
+      // alert("Game over!\n\nRestart?");
+      return cancelAnimationFrame(loop);
+    }
+
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
-    
+
     game.animate(dirCat, pause, dt);
 
     last = now;
 
     requestAnimationFrame(loop);
 
-    if (game.lost()) {
-      alert("Game over!\n\nRestart?");
-      // cancelAnimationFrame(loop);
-      // game.restart();
-      dirCat = 0;
-      pause = true;
-      game = new Game(canvas);
-      loop();
-      // game.animate(dirCat, pause, dt);
-      // requestAnimationFrame(loop);
-    }
+    // if (game.lost()) {
+    //   game.angry();
+    //   // cancelAnimationFrame(loop);
+    //   alert("Game over!\n\nRestart?");
+    //   dirCat = 0;
+    //   pause = true;
+    //   game = new Game(canvas);
+    //   loop();
+    // }
   } 
 
 });

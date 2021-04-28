@@ -1,5 +1,6 @@
 const Cat = require("./cat");
 const Human = require("./human");
+const angryHuman = require('./angryHuman');
 const Sofa = require("./sofa");
 const Table = require("./table");
 const Item = require("./item");
@@ -39,6 +40,11 @@ class Game {
 
   lost() {
     return (!this.catPause && this.human.status === "checking");
+  }
+
+  angry() {
+    this.human = new angryHuman(this.dimensions);
+    this.human.drawHuman(this.ctx);
   }
 
   restart() {

@@ -34,27 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
+    if (game.lost()) {
+      game.angry();
+      // alert("Game over!\n\nRestart?");
+      return cancelAnimationFrame(loop);
+    }
+
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
-    
+
     game.animate(dirCat, pause, dt);
 
     last = now;
 
     requestAnimationFrame(loop);
 
-    if (game.lost()) {
-      alert("Game over!\n\nRestart?");
-      // cancelAnimationFrame(loop);
-      // game.restart();
-      dirCat = 0;
-      pause = true;
-      game = new Game(canvas);
-      loop();
-      // game.animate(dirCat, pause, dt);
-      // requestAnimationFrame(loop);
-    }
+    // if (game.lost()) {
+    //   game.angry();
+    //   // cancelAnimationFrame(loop);
+    //   alert("Game over!\n\nRestart?");
+    //   dirCat = 0;
+    //   pause = true;
+    //   game = new Game(canvas);
+    //   loop();
+    // }
   } 
 
 });
