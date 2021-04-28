@@ -2,7 +2,7 @@ const Game = require('./classes/game');
 
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
-  const game = new Game(canvas);
+  let game = new Game(canvas);
 
   let dirCat = 0, pause = true;
 
@@ -44,10 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(loop);
 
     if (game.lost()) {
-      alert("Game over!");
+      alert("Game over!\n\nRestart?");
       // cancelAnimationFrame(loop);
-      game.restart();
+      // game.restart();
+      dirCat = 0;
       pause = true;
+      game = new Game(canvas);
       loop();
       // game.animate(dirCat, pause, dt);
       // requestAnimationFrame(loop);

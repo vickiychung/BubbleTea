@@ -3,29 +3,40 @@ const CONSTANTS = {
   HUMAN_HEIGHT: 35
 };
 
+const humanImg = new Image();
+humanImg.src = './assets/images/human.png';
+
+const angryHumanImg = new Image();
+angryHumanImg.src = './assets/images/angryHuman.png';
+// img attribution
+// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = 10;
     this.y = dimensions.height / 2 - 10;
-    this.color = "black";
+    this.img = humanImg;
+    this.status = "working";
   }
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
 
-    if (Math.floor(dt * 1000) === 25) {
+    if (Math.floor(dt * 1000) === 20) {
       this.moveHuman();
     }
   }
 
   drawHuman(ctx) {
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = "transparent";
     ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
   }
 
   moveHuman() {
-    this.color = "pink";
+    this.img = angryHumanImg;
+    this.status = "angry";
   }
 }
 

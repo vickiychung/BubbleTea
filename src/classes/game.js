@@ -38,7 +38,7 @@ class Game {
   }
 
   lost() {
-    return (!this.catPause && this.human.color === "pink");
+    return (!this.catPause && this.human.status === "angry");
   }
 
   restart() {
