@@ -4,10 +4,10 @@ const CONSTANTS = {
 };
 
 const humanImg = new Image();
-humanImg.src = './assets/images/human.png';
+humanImg.src = './dist/assets/images/human.png';
 
 const checkingHumanImg = new Image();
-checkingHumanImg.src = './assets/images/checkingHuman.png';
+checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 // img attribution
 // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 

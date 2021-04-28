@@ -4,7 +4,7 @@ const CONSTANTS = {
 };
 
 const catImg = new Image();
-catImg.src = './assets/images/cat.png';
+catImg.src = './dist/assets/images/cat.png';
 
 class Cat {
   constructor(dimensions) {

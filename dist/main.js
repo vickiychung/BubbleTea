@@ -13,7 +13,7 @@ const CONSTANTS = {
 };
 
 const angryHumanImg = new Image();
-angryHumanImg.src = './assets/images/angryHuman.png';
+angryHumanImg.src = './dist/assets/images/angryHuman.png';
 // img attribution
 // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
@@ -50,7 +50,7 @@ const CONSTANTS = {
 };
 
 const catImg = new Image();
-catImg.src = './assets/images/cat.png';
+catImg.src = './dist/assets/images/cat.png';
 
 class Cat {
   constructor(dimensions) {
@@ -179,10 +179,10 @@ const CONSTANTS = {
 };
 
 const humanImg = new Image();
-humanImg.src = './assets/images/human.png';
+humanImg.src = './dist/assets/images/human.png';
 
 const checkingHumanImg = new Image();
-checkingHumanImg.src = './assets/images/checkingHuman.png';
+checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 // img attribution
 // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
@@ -259,7 +259,7 @@ const CONSTANTS = {
 };
 
 const sofaImg = new Image();
-sofaImg.src = './assets/images/sofa.png'
+sofaImg.src = './dist/assets/images/sofa.png'
 
 // img attribution
 // Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
@@ -295,7 +295,7 @@ const CONSTANTS = {
 };
 
 const tableImg = new Image();
-tableImg.src = './assets/images/table.png';
+tableImg.src = './dist/assets/images/table.png';
 // img attribution
 // <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 

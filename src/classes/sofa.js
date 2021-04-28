@@ -4,7 +4,7 @@ const CONSTANTS = {
 };
 
 const sofaImg = new Image();
-sofaImg.src = './assets/images/sofa.png'
+sofaImg.src = './dist/assets/images/sofa.png'
 
 // img attribution
 // Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
