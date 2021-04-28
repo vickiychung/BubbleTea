@@ -128,7 +128,7 @@ class Game {
   }
 
   lost() {
-    return (!this.catPause && this.human.status === "checking");
+    return (!this.pauseCat && this.human.status === "checking");
   }
 
   angry() {
@@ -143,7 +143,7 @@ class Game {
     this.table = new Table(this.dimensions);
   }
 
-  animate(dirCat, catPause, dt) {
+  animate(dirCat, pauseCat, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -154,7 +154,7 @@ class Game {
       this.items[i].drawItem(this.ctx);
     }
 
-    this.catPause = catPause;
+    this.pauseCat = pauseCat;
 
     this.stealItem();
   }
@@ -362,29 +362,34 @@ const Game = __webpack_require__(/*! ./classes/game */ "./src/classes/game.js");
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
   let game = new Game(canvas);
-  let dirCat = 0, pause = true;
+  let dirCat = 0, pauseCat = true, pauseGame = true;
 
   requestAnimationFrame(loop);
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
+  const pauseButton = document.getElementById("pause-button");
   const restartButton = document.getElementById("restart-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
-    pause = !pause;
+    pauseCat = !pauseCat;
     loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
-    pause = !pause;
+    pauseCat = !pauseCat;
     loop();
   });
 
+  pauseButton.addEventListener("mousedown", e => {
+    pauseGame = !pauseGame;
+  })
+
   restartButton.addEventListener("mousedown", e => {
     dirCat = 0;
-    pause = true;
+    pauseCat = true;
     game = new Game(canvas);
     loop();
   });
@@ -396,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let now, dt, last = timestamp();
 
   function loop() {
-    if (pause) {
+    if (pauseCat) {
       return cancelAnimationFrame(loop);
     }
 
@@ -410,7 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
 
-    game.animate(dirCat, pause, dt);
+    game.animate(dirCat, pauseCat, dt);
 
     last = now;
 
