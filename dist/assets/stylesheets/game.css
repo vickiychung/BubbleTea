@@ -37,6 +37,8 @@ header {
 }
 
 .game-controls-wrapper, .cat-controls-wrapper {
+  font-family: 'Freckle Face', cursive;
+  font-size: 20px;
   text-transform: uppercase;
   color: palevioletred;
 
@@ -58,7 +60,7 @@ button {
   background-color: pink;
   color: rgb(87, 84, 84);
   font-family: 'Comfortaa', cursive;
-  font-size: 18px;
+  font-size: 17px;
 
   border-style: outset;
   border-color: palevioletred;

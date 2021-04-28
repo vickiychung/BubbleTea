@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     pauseCat = true;
     pauseGame = true;
     game = new Game(canvas);
-    // requestAnimationFrame(loop);
-    // loop();
   });
 
   function timestamp() {
@@ -53,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
-      // alert("lost")
       return cancelAnimationFrame(loop);
     }
 
