@@ -11,10 +11,19 @@ class Human {
   }
 
   animate(ctx, dt) {
-    console.log(dt);
     this.drawHuman(ctx);
 
-    // this.randomTurn(ctx);
+    console.log(dt*1000);
+    
+    let last;
+
+    const min = 20, max = 50;
+    let rand = Math.floor(Math.random() * (max - min + 1) + min);
+    if (dt * 1000 >= 20 && dt * 1000 <= 50) {
+      this.moveHuman(ctx);
+    }
+
+    last = dt;
   }
 
   drawHuman(ctx) {
