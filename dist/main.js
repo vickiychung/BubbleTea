@@ -16,7 +16,7 @@ class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
-    this.y = this.dimensions.height / 2;
+    this.y = this.dimensions.height - 40;
   }
 
   animate(ctx, dir) {
@@ -50,13 +50,24 @@ const Cat = __webpack_require__(/*! ./cat */ "./src/classes/cat.js");
 const Human = __webpack_require__(/*! ./human */ "./src/classes/human.js");
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
+const Item = __webpack_require__(/*! ./item */ "./src/classes/item.js");
 
 class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
+    this.itemsNum = 5;
+    this.items = [];
+    this.addItems();
+    
     this.play(0);
+  }
+
+  addItems() {
+    for (let i = 0; i < this.itemsNum; i++) {
+      this.items.push(new Item(this.dimensions));
+    }
   }
 
   play(dirCat) {
@@ -64,6 +75,7 @@ class Game {
     this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
+    // this.item = new Item(this.dimensions);
     this.animate(dirCat);
   }
 
@@ -84,6 +96,10 @@ class Game {
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
     this.human.animate(this.ctx, dt);
+
+    for (let i = 0; i < this.items.length; i++) {
+      this.items[i].drawItem(this.ctx);
+    }
 
     this.catPause = catPause;
   }
@@ -118,7 +134,7 @@ class Human {
   animate(ctx, dt) {
     this.drawHuman(ctx);
 
-    if (Math.floor(dt * 1000) === 20) {
+    if (Math.floor(dt * 1000) === 25) {
       this.moveHuman();
     }
   }
@@ -134,6 +150,35 @@ class Human {
 }
 
 module.exports = Human;
+
+
+/***/ }),
+
+/***/ "./src/classes/item.js":
+/*!*****************************!*\
+  !*** ./src/classes/item.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+class Item {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = (this.dimensions.width / 2) * Math.random();
+    this.y = this.dimensions.height - 20;
+  }
+
+  drawItem(ctx) {
+    console.log("draw")
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(
+      this.x, this.y, 5, 0, 2 * Math.PI
+    );
+    ctx.fill();
+  }
+}
+
+module.exports = Item;
 
 
 /***/ }),

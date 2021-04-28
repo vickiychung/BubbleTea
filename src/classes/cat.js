@@ -7,7 +7,7 @@ class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
-    this.y = this.dimensions.height / 2;
+    this.y = this.dimensions.height - 40;
   }
 
   animate(ctx, dir) {

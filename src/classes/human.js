@@ -14,7 +14,7 @@ class Human {
   animate(ctx, dt) {
     this.drawHuman(ctx);
 
-    if (Math.floor(dt * 1000) === 20) {
+    if (Math.floor(dt * 1000) === 25) {
       this.moveHuman();
     }
   }
