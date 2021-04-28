@@ -241,6 +241,11 @@ const CONSTANTS = {
   TABLE_HEIGHT: 50
 };
 
+const tableImg = new Image();
+tableImg.src = './assets/images/table.png';
+// img attribution
+// <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 class Table {
   constructor(dimensions) {
     this.dimensions = dimensions;
@@ -249,8 +254,9 @@ class Table {
   }
 
   drawTable(ctx) {
-    ctx.fillStyle = "brown";
+    ctx.fillStyle = "beige";
     ctx.fillRect(this.x, this.y, CONSTANTS.TABLE_WIDTH, CONSTANTS.TABLE_HEIGHT);
+    ctx.drawImage(tableImg, this.x, this.y, CONSTANTS.TABLE_WIDTH, CONSTANTS.TABLE_HEIGHT);
   }
 }
 
