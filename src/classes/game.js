@@ -12,7 +12,6 @@ class Game {
   }
 
   play(dirCat) {
-    this.playing = true;
     this.cat = new Cat(this.dimensions);
     this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
@@ -20,12 +19,30 @@ class Game {
     this.animate(dirCat);
   }
 
+  lost() {
+    return (!this.catPause && this.human.color === "pink");
+  }
+
+  restart() {
+    this.cat = new Cat(this.dimensions);
+    this.human = new Human(this.dimensions);
+    this.sofa = new Sofa(this.dimensions);
+    this.table = new Table(this.dimensions);
+  }
+
   animate(dirCat, catPause, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
-    this.human.animate(this.ctx, catPause, dt);
+    this.human.animate(this.ctx, dt);
+
+    this.catPause = catPause;
+
+    // if (this.lost()) {
+    //   alert("Game over!");
+    //   this.play(0);
+    // }
   }
 
   

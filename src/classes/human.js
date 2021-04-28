@@ -11,11 +11,11 @@ class Human {
     this.color = "black";
   }
 
-  animate(ctx, catPause, dt) {
+  animate(ctx, dt) {
     this.drawHuman(ctx);
-
-    if (Math.floor(dt * 1000) === 25) {
-      this.moveHuman(ctx, catPause);
+    
+    if (Math.floor(dt * 1000) === 20) {
+      this.moveHuman();
     }
   }
 
@@ -24,13 +24,8 @@ class Human {
     ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
   }
 
-  moveHuman(ctx, catPause) {
-    if (!catPause) {
-      this.color = "pink";
-      ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
-
-      alert("lose");
-    }
+  moveHuman() {
+    this.color = "pink";
   }
 }
 

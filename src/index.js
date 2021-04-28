@@ -37,12 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
-
     game.animate(dirCat, pause, dt);
 
     last = now;
 
     requestAnimationFrame(loop);
+
+    if (game.lost()) {
+      alert("Game over!");
+      // cancelAnimationFrame(loop);
+      game.restart();
+      pause = true;
+      loop();
+      // game.animate(dirCat, pause, dt);
+      // requestAnimationFrame(loop);
+    }
   } 
 
 });
