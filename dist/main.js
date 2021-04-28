@@ -374,17 +374,18 @@ document.addEventListener("DOMContentLoaded", () => {
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
     pauseCat = !pauseCat;
-    loop();
+    // loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
     pauseCat = !pauseCat;
-    loop();
+    // loop();
   });
 
   pauseButton.addEventListener("mousedown", e => {
     pauseGame = !pauseGame;
+    loop();
   })
 
   restartButton.addEventListener("mousedown", e => {
@@ -402,6 +403,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loop() {
     if (pauseCat) {
+      // return cancelAnimationFrame(loop);
+      dirCat = 0;
+    }
+
+    if (pauseGame) {
       return cancelAnimationFrame(loop);
     }
 
