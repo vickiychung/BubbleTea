@@ -362,13 +362,13 @@ const Game = __webpack_require__(/*! ./classes/game */ "./src/classes/game.js");
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
   let game = new Game(canvas);
-
   let dirCat = 0, pause = true;
 
   requestAnimationFrame(loop);
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
+  const restartButton = document.getElementById("restart-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -379,6 +379,13 @@ document.addEventListener("DOMContentLoaded", () => {
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
     pause = !pause;
+    loop();
+  });
+
+  restartButton.addEventListener("mousedown", e => {
+     dirCat = 0;
+    pause = true;
+    game = new Game(canvas);
     loop();
   });
 
@@ -395,7 +402,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
-      // alert("Game over!\n\nRestart?");
       return cancelAnimationFrame(loop);
     }
 
@@ -408,17 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
     last = now;
 
     requestAnimationFrame(loop);
-
-    // if (game.lost()) {
-    //   game.angry();
-    //   // cancelAnimationFrame(loop);
-    //   alert("Game over!\n\nRestart?");
-    //   dirCat = 0;
-    //   pause = true;
-    //   game = new Game(canvas);
-    //   loop();
-    // }
-  } 
+  }
 
 });
 
