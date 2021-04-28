@@ -90,7 +90,7 @@ class Game {
   }
 
   lost() {
-    return (!this.catPause && this.human.status === "angry");
+    return (!this.catPause && this.human.status === "checking");
   }
 
   restart() {
@@ -140,6 +140,9 @@ humanImg.src = './assets/images/human.png';
 
 const angryHumanImg = new Image();
 angryHumanImg.src = './assets/images/angryHuman.png';
+
+const checkingHumanImg = new Image();
+checkingHumanImg.src = './assets/images/checkingHuman.png';
 // img attribution
 // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
@@ -167,8 +170,10 @@ class Human {
   }
 
   moveHuman() {
-    this.img = angryHumanImg;
-    this.status = "angry";
+    // this.img = angryHumanImg;
+    // this.status = "angry";
+    this.img = checkingHumanImg;
+    this.status = "checking";
   }
 }
 
@@ -348,6 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
+    
     game.animate(dirCat, pause, dt);
 
     last = now;
