@@ -8,7 +8,6 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    // this.restart();
     this.play(0);
   }
 
@@ -21,19 +20,12 @@ class Game {
     this.animate(dirCat);
   }
 
-  // restart(dir) {
-  //   this.cat = new Cat(this.dimensions);
-  //   this.sofa = new Sofa(this.dimensions);
-  //   this.table = new Table(this.dimensions);
-  //   this.animate(dir);
-  // }
-  
-  animate(dirCat, dt) {
+  animate(dirCat, catPause, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
-    this.human.animate(this.ctx, dt);
+    this.human.animate(this.ctx, catPause, dt);
   }
 
   

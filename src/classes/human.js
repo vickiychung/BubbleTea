@@ -8,43 +8,30 @@ class Human {
     this.dimensions = dimensions;
     this.x = 10;
     this.y = 0 + dimensions.height / 2 + 20;
+    this.color = "black";
   }
 
-  animate(ctx, dt) {
+  animate(ctx, catPause, dt) {
     this.drawHuman(ctx);
 
-    console.log(dt*1000);
-    
-    let last;
-
-    const min = 20, max = 50;
-    let rand = Math.floor(Math.random() * (max - min + 1) + min);
-    if (dt * 1000 >= 20 && dt * 1000 <= 50) {
-      this.moveHuman(ctx);
+    if (Math.floor(dt * 1000) === 25) {
+      this.moveHuman(ctx, catPause);
     }
-
-    last = dt;
   }
 
   drawHuman(ctx) {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
   }
 
-  moveHuman(ctx) {
-    const colors = ["black", "pink"];
-    let rand = Math.floor(Math.random() * 2);
-    let randColor = colors[rand];
+  moveHuman(ctx, catPause) {
+    if (!catPause) {
+      this.color = "pink";
+      ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
 
-    ctx.fillStyle = randColor;
-    ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+      alert("lose");
+    }
   }
-
-  // randomTurn(ctx) {
-  //   const min = 3, max = 5;
-  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
-  //   window.setTimeout(this.moveHuman(ctx), rand * 1000000000000000);
-  // }
 }
 
 module.exports = Human;

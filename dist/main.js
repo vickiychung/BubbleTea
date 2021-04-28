@@ -56,7 +56,6 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    // this.restart();
     this.play(0);
   }
 
@@ -69,19 +68,12 @@ class Game {
     this.animate(dirCat);
   }
 
-  // restart(dir) {
-  //   this.cat = new Cat(this.dimensions);
-  //   this.sofa = new Sofa(this.dimensions);
-  //   this.table = new Table(this.dimensions);
-  //   this.animate(dir);
-  // }
-  
-  animate(dirCat, dt) {
+  animate(dirCat, catPause, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
     this.cat.animate(this.ctx, dirCat);
-    this.human.animate(this.ctx, dt);
+    this.human.animate(this.ctx, catPause, dt);
   }
 
   
@@ -108,43 +100,30 @@ class Human {
     this.dimensions = dimensions;
     this.x = 10;
     this.y = 0 + dimensions.height / 2 + 20;
+    this.color = "black";
   }
 
-  animate(ctx, dt) {
+  animate(ctx, catPause, dt) {
     this.drawHuman(ctx);
 
-    console.log(dt*1000);
-    
-    let last;
-
-    const min = 20, max = 50;
-    let rand = Math.floor(Math.random() * (max - min + 1) + min);
-    if (dt * 1000 >= 20 && dt * 1000 <= 50) {
-      this.moveHuman(ctx);
+    if (Math.floor(dt * 1000) === 25) {
+      this.moveHuman(ctx, catPause);
     }
-
-    last = dt;
   }
 
   drawHuman(ctx) {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
   }
 
-  moveHuman(ctx) {
-    const colors = ["black", "pink"];
-    let rand = Math.floor(Math.random() * 2);
-    let randColor = colors[rand];
+  moveHuman(ctx, catPause) {
+    if (!catPause) {
+      this.color = "pink";
+      ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
 
-    ctx.fillStyle = randColor;
-    ctx.fillRect(this.x, this.y, CONSTANTS.HUMAN_WIDTH, CONSTANTS.HUMAN_HEIGHT);
+      alert("lose");
+    }
   }
-
-  // randomTurn(ctx) {
-  //   const min = 3, max = 5;
-  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
-  //   window.setTimeout(this.moveHuman(ctx), rand * 1000000000000000);
-  // }
 }
 
 module.exports = Human;
@@ -247,16 +226,14 @@ const Game = __webpack_require__(/*! ./classes/game */ "./src/classes/game.js");
 
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
-
   const game = new Game(canvas);
+
   let dirCat = 0, pause = true;
-  // loop();
+
   requestAnimationFrame(loop);
-  // randomTurn();
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
-  // const playButton = document.getElementById("play-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -270,25 +247,10 @@ document.addEventListener("DOMContentLoaded", () => {
     loop();
   });
 
-  // playButton.addEventListener("mousedown", e => {
-  //   pause = false;
-  //   loop();
-  // })
-
-  // function randomTurn() {
-  //    console.log(turnHuman);
-
-  //   const min = 3, max = 5;
-  //   let rand = Math.floor(Math.random() * (max - min + 1) + min);
-  //   turnHuman = !turnHuman;
-  //   window.setTimeout(randomTurn(), rand * 1000);
-  // }
-
   function timestamp() {
-    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+    return new Date().getTime();
   }
 
-  // let now, dt = 0, last = timestamp(), step = 1/60;
   let now, dt, last = timestamp();
 
   function loop() {
@@ -297,14 +259,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     now = timestamp();
-    // dt = dt + Math.min(1, (now - last) / 1000);
-    // while (dt > step) {
-    //   dt = dt - step;
-    // }
-
+    dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
 
-    game.animate(dirCat, dt);
+    game.animate(dirCat, pause, dt);
 
     last = now;
 
