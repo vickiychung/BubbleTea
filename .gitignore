@@ -13,9 +13,5 @@
 /yarn-error.log
 /public/assets
 # Ignore master key for decrypting credentials and more.
-bundle.js
-bundle.js.map
 .DS_Store
 npm-debug.log
-/dist/main.js
-/dist/main.js.map
