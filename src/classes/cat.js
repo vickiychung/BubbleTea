@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  CAT_WIDTH: 40,
-  CAT_HEIGHT: 30
+  CAT_WIDTH: 30,
+  CAT_HEIGHT: 25
 };
 
 class Cat {

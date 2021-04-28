@@ -22,12 +22,18 @@ class Game {
     }
   }
 
+  stealItem() {
+    for (let i = 0; i < this.items.length; i++) {
+      if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+      }
+    }
+  }
+
   play(dirCat) {
     this.cat = new Cat(this.dimensions);
     this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
-    // this.item = new Item(this.dimensions);
     this.animate(dirCat);
   }
 
@@ -54,6 +60,8 @@ class Game {
     }
 
     this.catPause = catPause;
+
+    this.stealItem();
   }
 
   

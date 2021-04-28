@@ -6,7 +6,6 @@ class Item {
   }
 
   drawItem(ctx) {
-    console.log("draw")
     ctx.fillStyle = "green";
     ctx.beginPath();
     ctx.arc(

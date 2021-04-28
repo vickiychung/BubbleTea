@@ -8,8 +8,8 @@
 /***/ ((module) => {
 
 const CONSTANTS = {
-  CAT_WIDTH: 40,
-  CAT_HEIGHT: 30
+  CAT_WIDTH: 30,
+  CAT_HEIGHT: 25
 };
 
 class Cat {
@@ -70,12 +70,18 @@ class Game {
     }
   }
 
+  stealItem() {
+    for (let i = 0; i < this.items.length; i++) {
+      if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+      }
+    }
+  }
+
   play(dirCat) {
     this.cat = new Cat(this.dimensions);
     this.human = new Human(this.dimensions);
     this.sofa = new Sofa(this.dimensions);
     this.table = new Table(this.dimensions);
-    // this.item = new Item(this.dimensions);
     this.animate(dirCat);
   }
 
@@ -102,6 +108,8 @@ class Game {
     }
 
     this.catPause = catPause;
+
+    this.stealItem();
   }
 
   
@@ -168,7 +176,6 @@ class Item {
   }
 
   drawItem(ctx) {
-    console.log("draw")
     ctx.fillStyle = "green";
     ctx.beginPath();
     ctx.arc(
