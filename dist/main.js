@@ -201,20 +201,27 @@ module.exports = Item;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  SOFA_WIDTH: 50,
-  SOFA_HEIGHT: 130
+  SOFA_WIDTH: 100,
+  SOFA_HEIGHT: 150
 };
+
+const sofaImg = new Image();
+sofaImg.src = './assets/images/sofa.png'
+
+// img attribution
+// Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 class Sofa {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH + 20;
     this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT;
   }
 
   drawSofa(ctx) {
-    ctx.fillStyle = "#484848";
+    ctx.fillStyle = "beige";
     ctx.fillRect(this.x, this.y, CONSTANTS.SOFA_WIDTH, CONSTANTS.SOFA_HEIGHT);
+    ctx.drawImage(sofaImg, this.x, this.y, CONSTANTS.SOFA_WIDTH, CONSTANTS.SOFA_HEIGHT);
   }
 }
 
