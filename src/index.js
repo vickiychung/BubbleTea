@@ -15,13 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
     pauseCat = !pauseCat;
-    // loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
     pauseCat = !pauseCat;
-    // loop();
   });
 
   pauseButton.addEventListener("mousedown", e => {
@@ -32,8 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
   restartButton.addEventListener("mousedown", e => {
     dirCat = 0;
     pauseCat = true;
+    pauseGame = true;
     game = new Game(canvas);
-    loop();
+    // requestAnimationFrame(loop);
+    // loop();
   });
 
   function timestamp() {
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loop() {
     if (pauseCat) {
-      // return cancelAnimationFrame(loop);
       dirCat = 0;
     }
 

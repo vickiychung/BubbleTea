@@ -181,9 +181,6 @@ const CONSTANTS = {
 const humanImg = new Image();
 humanImg.src = './assets/images/human.png';
 
-const angryHumanImg = new Image();
-angryHumanImg.src = './assets/images/angryHuman.png';
-
 const checkingHumanImg = new Image();
 checkingHumanImg.src = './assets/images/checkingHuman.png';
 // img attribution
@@ -200,10 +197,9 @@ class Human {
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-
-    if (Math.floor(dt * 1000) === 20) {
+    if (Math.floor(dt * 1000) === 23) {
       this.moveHuman();
-    }
+    } 
   }
 
   drawHuman(ctx) {
@@ -213,10 +209,8 @@ class Human {
   }
 
   moveHuman() {
-    // this.img = angryHumanImg;
-    // this.status = "angry";
-    this.img = checkingHumanImg;
-    this.status = "checking";
+    this.img = (this.img === checkingHumanImg) ? humanImg : checkingHumanImg;
+    this.status = (this.status === "checking") ? "working" : "checking";
   }
 }
 
@@ -260,8 +254,8 @@ module.exports = Item;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  SOFA_WIDTH: 100,
-  SOFA_HEIGHT: 150
+  SOFA_WIDTH: 80,
+  SOFA_HEIGHT: 100
 };
 
 const sofaImg = new Image();
@@ -273,8 +267,8 @@ sofaImg.src = './assets/images/sofa.png'
 class Sofa {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH + 20;
-    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH - 3;
+    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT - 5;
   }
 
   drawSofa(ctx) {
@@ -374,13 +368,11 @@ document.addEventListener("DOMContentLoaded", () => {
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
     pauseCat = !pauseCat;
-    // loop();
   });
 
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
     pauseCat = !pauseCat;
-    // loop();
   });
 
   pauseButton.addEventListener("mousedown", e => {
@@ -391,8 +383,10 @@ document.addEventListener("DOMContentLoaded", () => {
   restartButton.addEventListener("mousedown", e => {
     dirCat = 0;
     pauseCat = true;
+    pauseGame = true;
     game = new Game(canvas);
-    loop();
+    // requestAnimationFrame(loop);
+    // loop();
   });
 
   function timestamp() {
@@ -403,7 +397,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loop() {
     if (pauseCat) {
-      // return cancelAnimationFrame(loop);
       dirCat = 0;
     }
 
