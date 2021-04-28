@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   restartButton.addEventListener("mousedown", e => {
-     dirCat = 0;
+    dirCat = 0;
     pause = true;
     game = new Game(canvas);
     loop();
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
+      // alert("lost")
       return cancelAnimationFrame(loop);
     }
 
