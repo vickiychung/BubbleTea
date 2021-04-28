@@ -19,8 +19,8 @@ class Cat {
   }
 
   drawCat(ctx){
-    // ctx.fillStyle = "orange";
-    // ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
+    ctx.fillStyle = "orange";
+    ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
     ctx.drawImage(catImg, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
   }
 
