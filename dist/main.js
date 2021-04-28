@@ -128,7 +128,7 @@ class Game {
   }
 
   lost() {
-    return (!this.catPause && this.human.status === "checking");
+    return (!this.pauseCat && this.human.status === "checking");
   }
 
   angry() {
@@ -143,7 +143,7 @@ class Game {
     this.table = new Table(this.dimensions);
   }
 
-  animate(dirCat, catPause, dt) {
+  animate(dirCat, pauseCat, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -154,7 +154,7 @@ class Game {
       this.items[i].drawItem(this.ctx);
     }
 
-    this.catPause = catPause;
+    this.pauseCat = pauseCat;
 
     this.stealItem();
   }
@@ -181,9 +181,6 @@ const CONSTANTS = {
 const humanImg = new Image();
 humanImg.src = './assets/images/human.png';
 
-const angryHumanImg = new Image();
-angryHumanImg.src = './assets/images/angryHuman.png';
-
 const checkingHumanImg = new Image();
 checkingHumanImg.src = './assets/images/checkingHuman.png';
 // img attribution
@@ -200,10 +197,9 @@ class Human {
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-
-    if (Math.floor(dt * 1000) === 20) {
+    if (Math.floor(dt * 1000) === 23) {
       this.moveHuman();
-    }
+    } 
   }
 
   drawHuman(ctx) {
@@ -213,10 +209,8 @@ class Human {
   }
 
   moveHuman() {
-    // this.img = angryHumanImg;
-    // this.status = "angry";
-    this.img = checkingHumanImg;
-    this.status = "checking";
+    this.img = (this.img === checkingHumanImg) ? humanImg : checkingHumanImg;
+    this.status = (this.status === "checking") ? "working" : "checking";
   }
 }
 
@@ -260,8 +254,8 @@ module.exports = Item;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  SOFA_WIDTH: 100,
-  SOFA_HEIGHT: 150
+  SOFA_WIDTH: 80,
+  SOFA_HEIGHT: 100
 };
 
 const sofaImg = new Image();
@@ -273,8 +267,8 @@ sofaImg.src = './assets/images/sofa.png'
 class Sofa {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH + 20;
-    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH - 3;
+    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT - 5;
   }
 
   drawSofa(ctx) {
@@ -362,31 +356,37 @@ const Game = __webpack_require__(/*! ./classes/game */ "./src/classes/game.js");
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("game-canvas");
   let game = new Game(canvas);
-  let dirCat = 0, pause = true;
+  let dirCat = 0, pauseCat = true, pauseGame = true;
 
   requestAnimationFrame(loop);
 
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
+  const pauseButton = document.getElementById("pause-button");
   const restartButton = document.getElementById("restart-button");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
-    pause = !pause;
-    loop();
+    pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
     dirCat = 0.3;
-    pause = !pause;
-    loop();
+    pauseCat = !pauseCat;
   });
+
+  pauseButton.addEventListener("mousedown", e => {
+    pauseGame = !pauseGame;
+    loop();
+  })
 
   restartButton.addEventListener("mousedown", e => {
     dirCat = 0;
-    pause = true;
+    pauseCat = true;
+    pauseGame = true;
     game = new Game(canvas);
-    loop();
+    // requestAnimationFrame(loop);
+    // loop();
   });
 
   function timestamp() {
@@ -396,7 +396,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let now, dt, last = timestamp();
 
   function loop() {
-    if (pause) {
+    if (pauseCat) {
+      dirCat = 0;
+    }
+
+    if (pauseGame) {
       return cancelAnimationFrame(loop);
     }
 
@@ -410,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
 
-    game.animate(dirCat, pause, dt);
+    game.animate(dirCat, pauseCat, dt);
 
     last = now;
 

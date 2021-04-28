@@ -39,7 +39,7 @@ class Game {
   }
 
   lost() {
-    return (!this.catPause && this.human.status === "checking");
+    return (!this.pauseCat && this.human.status === "checking");
   }
 
   angry() {
@@ -54,7 +54,7 @@ class Game {
     this.table = new Table(this.dimensions);
   }
 
-  animate(dirCat, catPause, dt) {
+  animate(dirCat, pauseCat, dt) {
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -65,7 +65,7 @@ class Game {
       this.items[i].drawItem(this.ctx);
     }
 
-    this.catPause = catPause;
+    this.pauseCat = pauseCat;
 
     this.stealItem();
   }

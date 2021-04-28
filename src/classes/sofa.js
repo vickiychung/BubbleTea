@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  SOFA_WIDTH: 100,
-  SOFA_HEIGHT: 150
+  SOFA_WIDTH: 80,
+  SOFA_HEIGHT: 100
 };
 
 const sofaImg = new Image();
@@ -12,8 +12,8 @@ sofaImg.src = './assets/images/sofa.png'
 class Sofa {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH + 20;
-    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH - 3;
+    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT - 5;
   }
 
   drawSofa(ctx) {

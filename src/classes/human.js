@@ -6,9 +6,6 @@ const CONSTANTS = {
 const humanImg = new Image();
 humanImg.src = './assets/images/human.png';
 
-const angryHumanImg = new Image();
-angryHumanImg.src = './assets/images/angryHuman.png';
-
 const checkingHumanImg = new Image();
 checkingHumanImg.src = './assets/images/checkingHuman.png';
 // img attribution
@@ -25,10 +22,9 @@ class Human {
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-
-    if (Math.floor(dt * 1000) === 20) {
+    if (Math.floor(dt * 1000) === 23) {
       this.moveHuman();
-    }
+    } 
   }
 
   drawHuman(ctx) {
@@ -38,10 +34,8 @@ class Human {
   }
 
   moveHuman() {
-    // this.img = angryHumanImg;
-    // this.status = "angry";
-    this.img = checkingHumanImg;
-    this.status = "checking";
+    this.img = (this.img === checkingHumanImg) ? humanImg : checkingHumanImg;
+    this.status = (this.status === "checking") ? "working" : "checking";
   }
 }
 
