@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Naughty Paw</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Freckle+Face&display=swap"
+      rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/reset.css" />
     <link rel="stylesheet" type="text/css" href="./assets//stylesheets//game.css">
@@ -15,9 +18,25 @@
   <body>
     <header>Naughty Paw</header>
     <canvas id="game-canvas" style="height: 600px; width: 1000px;"></canvas>
-    <button id="left-button">left / pause</button>
-    <button id="right-button">right / pause</button>
-    <button id="pause-button">start / pause</button>
-    <button id="restart-button">restart</button>
+
+    <div class="buttons-wrapper">
+      <div class="game-controls-wrapper">
+        <p>Game Controls</p>
+        
+        <div class="game-buttons-wrapper">
+          <button id="restart-button">restart</button>
+          <button id="pause-button">start / pause</button>
+        </div>
+      </div>
+
+      <div class="cat-controls-wrapper">
+        <p>Cat Controls</p>
+        
+        <div class="cat-buttons-wrapper">
+          <button id="left-button">left / pause</button>
+          <button id="right-button">right / pause</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
