@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gameoverText.classList.add("hidden");
       wonText.classList.remove("hidden");
 
-      return cancelAnimationFrame(loop);
+      // return cancelAnimationFrame(loop);
     }
 
     now = timestamp();
