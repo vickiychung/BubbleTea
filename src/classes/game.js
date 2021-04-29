@@ -33,7 +33,6 @@ class Game {
   }
 
   fetchItem(itemIdx) {
-    console.log(itemIdx)
     this.items[itemIdx]["x"] = this.cat.x;
   }
 

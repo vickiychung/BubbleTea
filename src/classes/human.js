@@ -14,7 +14,7 @@ checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 10;
+    this.x = 13;
     this.y = dimensions.height / 2 - 10;
     this.img = humanImg;
     this.status = "working";
