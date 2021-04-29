@@ -68,14 +68,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    if (game.lost()) {
-      game.angry();
+    // if (game.lost()) {
+    //   game.angry();
       
-      gameInstruct.classList.add("hidden");
-      playingText.classList.add("hidden");
-      gameoverText.classList.remove("hidden");
+    //   gameInstruct.classList.add("hidden");
+    //   playingText.classList.add("hidden");
+    //   gameoverText.classList.remove("hidden");
 
-      return cancelAnimationFrame(loop);
+    //   return cancelAnimationFrame(loop);
+    // }
+
+    if (game.won()) {
+      console.log("win")
     }
 
     now = timestamp();
@@ -88,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
+  window.game = game;
+  window.game.stashedItems = game.stashedItems;
 });
 
 console.log("Webpack is working!")
