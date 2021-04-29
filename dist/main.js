@@ -98,7 +98,7 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    this.itemsNum = 5;
+    this.itemsNum = 3;
     this.items = [];
     this.addItems();
     
@@ -122,7 +122,7 @@ class Game {
 
   fetchItem(itemIdx) {
     console.log(itemIdx)
-    // delete this.items[itemIdx];
+    this.items[itemIdx]["x"] = this.cat.x;
   }
 
   play(dirCat) {
@@ -396,10 +396,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
+      gameoverText.classList.add("hidden");
       playingText.classList.remove("hidden");
     } else {
-      gameInstruct.classList.remove("hidden");
       playingText.classList.add("hidden");
+      gameoverText.classList.add("hidden");
+      gameInstruct.classList.remove("hidden");
     }
 
     loop();
@@ -433,8 +435,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
+      
+      gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
       gameoverText.classList.remove("hidden");
+
       return cancelAnimationFrame(loop);
     }
 
@@ -448,7 +453,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
-
 });
 
 console.log("Webpack is working!")

@@ -10,7 +10,7 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    this.itemsNum = 5;
+    this.itemsNum = 3;
     this.items = [];
     this.addItems();
     
@@ -34,7 +34,7 @@ class Game {
 
   fetchItem(itemIdx) {
     console.log(itemIdx)
-    // delete this.items[itemIdx];
+    this.items[itemIdx]["x"] = this.cat.x;
   }
 
   play(dirCat) {
