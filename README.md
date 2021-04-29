@@ -1,5 +1,7 @@
 # Naughty Paw
 
+[Live App](https://vickiychung.github.io/NaughtyPaw/)
+
 ## Overview
 Naughty Paw is a simple game inspired by frequent mischeivous acts of my roommates' cats.
 
