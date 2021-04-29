@@ -69,6 +69,7 @@ class Game {
 
   happyCat() {
     if (this.gameWon) {
+      this.cat.changeImg(this.ctx);
     }
   }
 
