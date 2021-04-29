@@ -18,6 +18,15 @@ header {
   color: rgb(241, 159, 6);
 
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.socials-wrapper {
+  font-size: 25px;
+  position: relative;
+  left: 300px;
 }
 
 #game-canvas {
