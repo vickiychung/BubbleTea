@@ -62,7 +62,14 @@ class Game {
   }
 
   won() {
-    return (this.items.length === 0 && this.stashedItems.length === this.itemsNum);
+    if (this.items.length === 0 && this.stashedItems.length === this.itemsNum) {
+      this.gameWon = true;
+    }
+  }
+
+  happyCat() {
+    if (this.gameWon) {
+    }
   }
 
   angry() {
@@ -94,6 +101,8 @@ class Game {
       }
     }
 
+    this.won();
+    this.happyCat();
     this.stealItem();
     this.stashItem();
   }

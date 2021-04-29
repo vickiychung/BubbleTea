@@ -150,7 +150,14 @@ class Game {
   }
 
   won() {
-    return (this.items.length === 0 && this.stashedItems.length === this.itemsNum);
+    if (this.items.length === 0 && this.stashedItems.length === this.itemsNum) {
+      this.gameWon = true;
+    }
+  }
+
+  happyCat() {
+    if (this.gameWon) {
+    }
   }
 
   angry() {
@@ -182,6 +189,8 @@ class Game {
       }
     }
 
+    this.won();
+    this.happyCat();
     this.stealItem();
     this.stashItem();
   }
@@ -478,13 +487,22 @@ document.addEventListener("DOMContentLoaded", () => {
     //   return cancelAnimationFrame(loop);
     // }
 
-    if (game.won()) {
+    // if (game.won()) {
+    //   gameInstruct.classList.add("hidden");
+    //   playingText.classList.add("hidden");
+    //   gameoverText.classList.add("hidden");
+    //   wonText.classList.remove("hidden");
+
+    //   // return cancelAnimationFrame(loop);
+    // }
+
+    if (game.gameWon) {
       gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
       gameoverText.classList.add("hidden");
       wonText.classList.remove("hidden");
 
-      // return cancelAnimationFrame(loop);
+      return cancelAnimationFrame(loop);
     }
 
     now = timestamp();
@@ -499,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.game = game;
   window.game.stashedItems = game.stashedItems;
+  window.game.gameWon = game.gameWon
 });
 
 console.log("Webpack is working!")
