@@ -61,6 +61,18 @@ class Game {
     return (!this.pauseCat && this.human.status === "checking");
   }
 
+  won() {
+    if (this.items.length === 0 && this.stashedItems.length === this.itemsNum) {
+      this.gameWon = true;
+    }
+  }
+
+  happyCat() {
+    if (this.gameWon) {
+      this.cat.changeImg(this.ctx);
+    }
+  }
+
   angry() {
     this.human = new angryHuman(this.dimensions);
     this.human.drawHuman(this.ctx);
@@ -90,6 +102,8 @@ class Game {
       }
     }
 
+    this.won();
+    this.happyCat();
     this.stealItem();
     this.stashItem();
   }

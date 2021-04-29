@@ -52,11 +52,15 @@ const CONSTANTS = {
 const catImg = new Image();
 catImg.src = './dist/assets/images/cat.png';
 
+const happyCatImg = new Image();
+happyCatImg.src = './dist/assets/images/happyCat.png';
+
 class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
     this.y = this.dimensions.height - 40;
+    this.img = catImg;
   }
 
   animate(ctx, dir) {
@@ -65,13 +69,18 @@ class Cat {
   }
 
   drawCat(ctx) {
-    ctx.fillStyle = "orange";
+    ctx.fillStyle = "transparent";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
-    ctx.drawImage(catImg, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
   }
 
   moveCat(dir) {
     this.x += dir;
+  }
+
+  changeImg(ctx) {
+    this.img = happyCatImg;
+    this.drawCat(ctx);
   }
 }
 
@@ -149,6 +158,18 @@ class Game {
     return (!this.pauseCat && this.human.status === "checking");
   }
 
+  won() {
+    if (this.items.length === 0 && this.stashedItems.length === this.itemsNum) {
+      this.gameWon = true;
+    }
+  }
+
+  happyCat() {
+    if (this.gameWon) {
+      this.cat.changeImg(this.ctx);
+    }
+  }
+
   angry() {
     this.human = new angryHuman(this.dimensions);
     this.human.drawHuman(this.ctx);
@@ -178,6 +199,8 @@ class Game {
       }
     }
 
+    this.won();
+    this.happyCat();
     this.stealItem();
     this.stashItem();
   }
@@ -406,6 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameInstruct = document.getElementById("instruction");
   const playingText = document.getElementById("playing-text");
   const gameoverText = document.getElementById("gameover-text");
+  const wonText = document.getElementById("won-text");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -423,10 +447,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
       gameoverText.classList.add("hidden");
+      wonText.classList.add("hidden");
       playingText.classList.remove("hidden");
     } else {
       playingText.classList.add("hidden");
       gameoverText.classList.add("hidden");
+      wonText.classList.add("hidden");
       gameInstruct.classList.remove("hidden");
     }
 
@@ -436,6 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
     playingText.classList.add("hidden");
+    wonText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;
@@ -464,7 +491,17 @@ document.addEventListener("DOMContentLoaded", () => {
       
       gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
+      wonText.classList.add("hidden");
       gameoverText.classList.remove("hidden");
+
+      return cancelAnimationFrame(loop);
+    }
+
+    if (game.gameWon) {
+      gameInstruct.classList.add("hidden");
+      playingText.classList.add("hidden");
+      gameoverText.classList.add("hidden");
+      wonText.classList.remove("hidden");
 
       return cancelAnimationFrame(loop);
     }

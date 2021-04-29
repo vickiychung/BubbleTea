@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameInstruct = document.getElementById("instruction");
   const playingText = document.getElementById("playing-text");
   const gameoverText = document.getElementById("gameover-text");
+  const wonText = document.getElementById("won-text");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -32,10 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
       gameoverText.classList.add("hidden");
+      wonText.classList.add("hidden");
       playingText.classList.remove("hidden");
     } else {
       playingText.classList.add("hidden");
       gameoverText.classList.add("hidden");
+      wonText.classList.add("hidden");
       gameInstruct.classList.remove("hidden");
     }
 
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
     playingText.classList.add("hidden");
+    wonText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;
@@ -73,7 +77,17 @@ document.addEventListener("DOMContentLoaded", () => {
       
       gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
+      wonText.classList.add("hidden");
       gameoverText.classList.remove("hidden");
+
+      return cancelAnimationFrame(loop);
+    }
+
+    if (game.gameWon) {
+      gameInstruct.classList.add("hidden");
+      playingText.classList.add("hidden");
+      gameoverText.classList.add("hidden");
+      wonText.classList.remove("hidden");
 
       return cancelAnimationFrame(loop);
     }
