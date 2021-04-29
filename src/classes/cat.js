@@ -23,7 +23,7 @@ class Cat {
   }
 
   drawCat(ctx) {
-    ctx.fillStyle = "orange";
+    ctx.fillStyle = "transparent";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
     ctx.drawImage(this.img, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
   }
