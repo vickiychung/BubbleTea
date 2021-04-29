@@ -101,7 +101,7 @@ class Game {
     this.itemsNum = 3;
     this.items = [];
     this.addItems();
-    
+
     this.play(0);
   }
 
@@ -114,7 +114,6 @@ class Game {
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
       if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
-        console.log("steal")
         this.fetchItem(i);
       }
     }
@@ -122,6 +121,7 @@ class Game {
 
   fetchItem(itemIdx) {
     this.items[itemIdx]["x"] = this.cat.x;
+    this.fetchedIdx = itemIdx;
   }
 
   play(dirCat) {
@@ -149,6 +149,8 @@ class Game {
   }
 
   animate(dirCat, pauseCat, dt) {
+    this.pauseCat = pauseCat;
+
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -156,10 +158,12 @@ class Game {
     this.human.animate(this.ctx, dt);
 
     for (let i = 0; i < this.items.length; i++) {
-      this.items[i].drawItem(this.ctx);
+      if (i === this.fetchedIdx) {
+        this.items[i].animate(this.ctx, dirCat);
+      } else {
+        this.items[i].drawItem(this.ctx);
+      }
     }
-
-    this.pauseCat = pauseCat;
 
     this.stealItem();
   }
@@ -246,10 +250,19 @@ class Item {
     this.img = itemImg;
   }
 
+  animate(ctx, dir) {
+    this.moveItem(dir);
+    this.drawItem(ctx);
+  }
+
   drawItem(ctx) {
     ctx.fillStyle = "transparent";
     ctx.fillRect(this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
     ctx.drawImage(this.img, this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+  }
+
+  moveItem(dir) {
+    this.x += dir;
   }
 }
 

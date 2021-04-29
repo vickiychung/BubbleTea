@@ -16,10 +16,19 @@ class Item {
     this.img = itemImg;
   }
 
+  animate(ctx, dir) {
+    this.moveItem(dir);
+    this.drawItem(ctx);
+  }
+
   drawItem(ctx) {
     ctx.fillStyle = "transparent";
     ctx.fillRect(this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
     ctx.drawImage(this.img, this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+  }
+
+  moveItem(dir) {
+    this.x += dir;
   }
 }
 
