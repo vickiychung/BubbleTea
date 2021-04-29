@@ -126,18 +126,7 @@ class Game {
   }
 
   stashItem() {
-    // if (this.fetchedIdx === undefined) return null;
     if (!Number.isInteger(this.fetchedIdx)) return null;
-
-    // if (Math.floor(this.items[this.fetchedIdx]["x"]) === Math.floor(this.sofa.x)) {
-    //   console.log("if")
-    //   this.stashedItems.push(this.items[this.fetchedIdx]);
-    //   this.stashedItems = [...new Set(this.stashedItems)];
-
-    //   this.items.splice(this.fetchedIdx, 1);
-    //   this.fetchedIdx = null;
-    // }
-    console.log(Math.floor(this.cat.x) === Math.floor(this.sofa.x));
 
     if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
       this.stashedItems.push(this.items[this.fetchedIdx]);
@@ -145,8 +134,6 @@ class Game {
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
-
-      console.log(this.items)
     }
   }
 
@@ -472,15 +459,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    // if (game.lost()) {
-    //   game.angry();
+    if (game.lost()) {
+      game.angry();
       
-    //   gameInstruct.classList.add("hidden");
-    //   playingText.classList.add("hidden");
-    //   gameoverText.classList.remove("hidden");
+      gameInstruct.classList.add("hidden");
+      playingText.classList.add("hidden");
+      gameoverText.classList.remove("hidden");
 
-    //   return cancelAnimationFrame(loop);
-    // }
+      return cancelAnimationFrame(loop);
+    }
 
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
@@ -492,9 +479,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
-
-  window.game = game
-  window.game.fetchedIdx = game.fetchedIdx
 });
 
 console.log("Webpack is working!")

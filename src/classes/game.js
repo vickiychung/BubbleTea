@@ -38,18 +38,7 @@ class Game {
   }
 
   stashItem() {
-    // if (this.fetchedIdx === undefined) return null;
     if (!Number.isInteger(this.fetchedIdx)) return null;
-
-    // if (Math.floor(this.items[this.fetchedIdx]["x"]) === Math.floor(this.sofa.x)) {
-    //   console.log("if")
-    //   this.stashedItems.push(this.items[this.fetchedIdx]);
-    //   this.stashedItems = [...new Set(this.stashedItems)];
-
-    //   this.items.splice(this.fetchedIdx, 1);
-    //   this.fetchedIdx = null;
-    // }
-    console.log(Math.floor(this.cat.x) === Math.floor(this.sofa.x));
 
     if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
       this.stashedItems.push(this.items[this.fetchedIdx]);
@@ -57,8 +46,6 @@ class Game {
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
-
-      console.log(this.items)
     }
   }
 
