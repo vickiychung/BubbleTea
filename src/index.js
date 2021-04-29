@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartButton = document.getElementById("restart-button");
 
   const gameInstruct = document.getElementById("instruction");
+  const playingText = document.getElementById("playing-text");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -28,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     pauseGame = !pauseGame;
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
+      playingText.classList.remove("hidden");
     } else {
       gameInstruct.classList.remove("hidden");
+      playingText.classList.add("hidden");
     }
     loop();
   })
