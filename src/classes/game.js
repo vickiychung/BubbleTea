@@ -44,7 +44,7 @@ class Game {
       this.stashedItems.push(this.items[this.fetchedIdx]);
       this.stashedItems = [...new Set(this.stashedItems)];
 
-      delete this.items[this.fetchedIdx];
+      this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
     }
   }
