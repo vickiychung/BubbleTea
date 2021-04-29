@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gameInstruct = document.getElementById("instruction");
   const playingText = document.getElementById("playing-text");
+  const gameoverText = document.getElementById("gameover-text");
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -0.3;
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   pauseButton.addEventListener("mousedown", e => {
     pauseGame = !pauseGame;
+
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
       playingText.classList.remove("hidden");
@@ -34,10 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
       gameInstruct.classList.remove("hidden");
       playingText.classList.add("hidden");
     }
+
     loop();
   })
 
   restartButton.addEventListener("mousedown", e => {
+    gameoverText.classList.add("hidden");
+    gameInstruct.classList.remove("hidden");
+
     dirCat = 0;
     pauseCat = true;
     pauseGame = true;
@@ -61,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
+      playingText.classList.add("hidden");
+      gameoverText.classList.remove("hidden");
       return cancelAnimationFrame(loop);
     }
 
