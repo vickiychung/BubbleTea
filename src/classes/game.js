@@ -26,8 +26,15 @@ class Game {
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
       if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+        console.log("steal")
+        this.fetchItem(i);
       }
     }
+  }
+
+  fetchItem(itemIdx) {
+    console.log(itemIdx)
+    // delete this.items[itemIdx];
   }
 
   play(dirCat) {
@@ -69,8 +76,6 @@ class Game {
 
     this.stealItem();
   }
-
-  
 }
 
 module.exports = Game;

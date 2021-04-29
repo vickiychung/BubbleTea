@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
+    playingText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;

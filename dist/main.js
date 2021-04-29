@@ -64,7 +64,7 @@ class Cat {
     this.drawCat(ctx);
   }
 
-  drawCat(ctx){
+  drawCat(ctx) {
     ctx.fillStyle = "orange";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
     ctx.drawImage(catImg, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
@@ -73,7 +73,6 @@ class Cat {
   moveCat(dir) {
     this.x += dir;
   }
-
 }
 
 module.exports = Cat;
@@ -115,8 +114,15 @@ class Game {
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
       if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+        console.log("steal")
+        this.fetchItem(i);
       }
     }
+  }
+
+  fetchItem(itemIdx) {
+    console.log(itemIdx)
+    // delete this.items[itemIdx];
   }
 
   play(dirCat) {
@@ -158,8 +164,6 @@ class Game {
 
     this.stealItem();
   }
-
-  
 }
 
 module.exports = Game;
@@ -403,6 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
+    playingText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;
