@@ -302,7 +302,7 @@ tableImg.src = './dist/assets/images/table.png';
 class Table {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 0;
+    this.x = 3;
     this.y = this.dimensions.height / 6;
   }
 
