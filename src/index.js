@@ -31,10 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
+      gameoverText.classList.add("hidden");
       playingText.classList.remove("hidden");
     } else {
-      gameInstruct.classList.remove("hidden");
       playingText.classList.add("hidden");
+      gameoverText.classList.add("hidden");
+      gameInstruct.classList.remove("hidden");
     }
 
     loop();
@@ -42,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
+    playingText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;
@@ -67,8 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
+      
+      gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
       gameoverText.classList.remove("hidden");
+
       return cancelAnimationFrame(loop);
     }
 
@@ -82,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
-
 });
 
 console.log("Webpack is working!")

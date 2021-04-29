@@ -10,10 +10,11 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    this.itemsNum = 5;
+    this.itemsNum = 3;
     this.items = [];
+    this.stashedItems = [];
+
     this.addItems();
-    
     this.play(0);
   }
 
@@ -25,8 +26,26 @@ class Game {
 
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
-      if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+      if (Math.floor(this.items[i]["x"]) === Math.floor(this.cat.x)) {
+        this.fetchItem(i);
       }
+    }
+  }
+
+  fetchItem(itemIdx) {
+    this.items[itemIdx]["x"] = this.cat.x;
+    this.fetchedIdx = itemIdx;
+  }
+
+  stashItem() {
+    if (!Number.isInteger(this.fetchedIdx)) return null;
+
+    if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
+      this.stashedItems.push(this.items[this.fetchedIdx]);
+      this.stashedItems = [...new Set(this.stashedItems)];
+
+      this.items.splice(this.fetchedIdx, 1);
+      this.fetchedIdx = null;
     }
   }
 
@@ -55,6 +74,8 @@ class Game {
   }
 
   animate(dirCat, pauseCat, dt) {
+    this.pauseCat = pauseCat;
+
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -62,15 +83,16 @@ class Game {
     this.human.animate(this.ctx, dt);
 
     for (let i = 0; i < this.items.length; i++) {
-      this.items[i].drawItem(this.ctx);
+      if (i === this.fetchedIdx) {
+        this.items[i].animate(this.ctx, dirCat);
+      } else {
+        this.items[i].drawItem(this.ctx);
+      }
     }
 
-    this.pauseCat = pauseCat;
-
     this.stealItem();
+    this.stashItem();
   }
-
-  
 }
 
 module.exports = Game;

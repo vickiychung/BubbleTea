@@ -64,7 +64,7 @@ class Cat {
     this.drawCat(ctx);
   }
 
-  drawCat(ctx){
+  drawCat(ctx) {
     ctx.fillStyle = "orange";
     ctx.fillRect(this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
     ctx.drawImage(catImg, this.x, this.y, CONSTANTS.CAT_WIDTH, CONSTANTS.CAT_HEIGHT);
@@ -73,7 +73,6 @@ class Cat {
   moveCat(dir) {
     this.x += dir;
   }
-
 }
 
 module.exports = Cat;
@@ -99,10 +98,11 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
 
-    this.itemsNum = 5;
+    this.itemsNum = 3;
     this.items = [];
+    this.stashedItems = [];
+
     this.addItems();
-    
     this.play(0);
   }
 
@@ -114,8 +114,26 @@ class Game {
 
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
-      if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+      if (Math.floor(this.items[i]["x"]) === Math.floor(this.cat.x)) {
+        this.fetchItem(i);
       }
+    }
+  }
+
+  fetchItem(itemIdx) {
+    this.items[itemIdx]["x"] = this.cat.x;
+    this.fetchedIdx = itemIdx;
+  }
+
+  stashItem() {
+    if (!Number.isInteger(this.fetchedIdx)) return null;
+
+    if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
+      this.stashedItems.push(this.items[this.fetchedIdx]);
+      this.stashedItems = [...new Set(this.stashedItems)];
+
+      this.items.splice(this.fetchedIdx, 1);
+      this.fetchedIdx = null;
     }
   }
 
@@ -144,6 +162,8 @@ class Game {
   }
 
   animate(dirCat, pauseCat, dt) {
+    this.pauseCat = pauseCat;
+
     this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.sofa.drawSofa(this.ctx);
     this.table.drawTable(this.ctx);
@@ -151,15 +171,16 @@ class Game {
     this.human.animate(this.ctx, dt);
 
     for (let i = 0; i < this.items.length; i++) {
-      this.items[i].drawItem(this.ctx);
+      if (i === this.fetchedIdx) {
+        this.items[i].animate(this.ctx, dirCat);
+      } else {
+        this.items[i].drawItem(this.ctx);
+      }
     }
 
-    this.pauseCat = pauseCat;
-
     this.stealItem();
+    this.stashItem();
   }
-
-  
 }
 
 module.exports = Game;
@@ -189,7 +210,7 @@ checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 10;
+    this.x = 13;
     this.y = dimensions.height / 2 - 10;
     this.img = humanImg;
     this.status = "working";
@@ -225,20 +246,37 @@ module.exports = Human;
   \*****************************/
 /***/ ((module) => {
 
+const CONSTANTS = {
+  ITEM_WIDTH: 20,
+  ITEM_HEIGHT: 20
+};
+
+// img attribution
+// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+const itemImg = new Image();
+itemImg.src = './dist/assets/images/item.png';
+
 class Item {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = (this.dimensions.width / 2) * Math.random();
-    this.y = this.dimensions.height - 20;
+    this.y = this.dimensions.height - 25;
+    this.img = itemImg;
+  }
+
+  animate(ctx, dir) {
+    this.moveItem(dir);
+    this.drawItem(ctx);
   }
 
   drawItem(ctx) {
-    ctx.fillStyle = "green";
-    ctx.beginPath();
-    ctx.arc(
-      this.x, this.y, 5, 0, 2 * Math.PI
-    );
-    ctx.fill();
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+  }
+
+  moveItem(dir) {
+    this.x += dir;
   }
 }
 
@@ -384,10 +422,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!pauseGame) {
       gameInstruct.classList.add("hidden");
+      gameoverText.classList.add("hidden");
       playingText.classList.remove("hidden");
     } else {
-      gameInstruct.classList.remove("hidden");
       playingText.classList.add("hidden");
+      gameoverText.classList.add("hidden");
+      gameInstruct.classList.remove("hidden");
     }
 
     loop();
@@ -395,6 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartButton.addEventListener("mousedown", e => {
     gameoverText.classList.add("hidden");
+    playingText.classList.add("hidden");
     gameInstruct.classList.remove("hidden");
 
     dirCat = 0;
@@ -420,8 +461,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (game.lost()) {
       game.angry();
+      
+      gameInstruct.classList.add("hidden");
       playingText.classList.add("hidden");
       gameoverText.classList.remove("hidden");
+
       return cancelAnimationFrame(loop);
     }
 
@@ -435,7 +479,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
-
 });
 
 console.log("Webpack is working!")
