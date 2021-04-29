@@ -88,6 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
+
+  window.game = game
+  window.game.fetchedIdx = game.fetchedIdx
 });
 
 console.log("Webpack is working!")
