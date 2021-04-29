@@ -17,7 +17,30 @@ header {
   font-size: 50px;
   color: rgb(241, 159, 6);
 
+  width: 1000px;
   margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+header p {
+  margin-left: auto;
+}
+
+.socials-wrapper {
+  font-size: 25px;
+  margin-left: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.socials-wrapper a:last-child {
+  margin-left: 5px;
 }
 
 #game-canvas {
