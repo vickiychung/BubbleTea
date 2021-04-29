@@ -100,8 +100,9 @@ class Game {
 
     this.itemsNum = 3;
     this.items = [];
-    this.addItems();
+    this.stashedItems = [];
 
+    this.addItems();
     this.play(0);
   }
 
@@ -113,7 +114,7 @@ class Game {
 
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
-      if (Math.floor(this.items[i].x) === Math.floor(this.cat.x)) {
+      if (Math.floor(this.items[i]["x"]) === Math.floor(this.cat.x)) {
         this.fetchItem(i);
       }
     }
@@ -122,6 +123,18 @@ class Game {
   fetchItem(itemIdx) {
     this.items[itemIdx]["x"] = this.cat.x;
     this.fetchedIdx = itemIdx;
+  }
+
+  stashItem() {
+    if (!this.fetchedIdx) return null;
+
+    if (Math.floor(this.items[this.fetchedIdx]["x"]) === Math.floor(this.sofa.x)) {
+      this.stashedItems.push(this.items[this.fetchedIdx]);
+      this.stashedItems = [...new Set(this.stashedItems)];
+
+      delete this.items[this.fetchedIdx];
+      this.fetchedIdx = null;
+    }
   }
 
   play(dirCat) {
@@ -166,6 +179,7 @@ class Game {
     }
 
     this.stealItem();
+    this.stashItem();
   }
 }
 
@@ -445,15 +459,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    if (game.lost()) {
-      game.angry();
+    // if (game.lost()) {
+    //   game.angry();
       
-      gameInstruct.classList.add("hidden");
-      playingText.classList.add("hidden");
-      gameoverText.classList.remove("hidden");
+    //   gameInstruct.classList.add("hidden");
+    //   playingText.classList.add("hidden");
+    //   gameoverText.classList.remove("hidden");
 
-      return cancelAnimationFrame(loop);
-    }
+    //   return cancelAnimationFrame(loop);
+    // }
 
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);

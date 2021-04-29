@@ -68,15 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    if (game.lost()) {
-      game.angry();
+    // if (game.lost()) {
+    //   game.angry();
       
-      gameInstruct.classList.add("hidden");
-      playingText.classList.add("hidden");
-      gameoverText.classList.remove("hidden");
+    //   gameInstruct.classList.add("hidden");
+    //   playingText.classList.add("hidden");
+    //   gameoverText.classList.remove("hidden");
 
-      return cancelAnimationFrame(loop);
-    }
+    //   return cancelAnimationFrame(loop);
+    // }
 
     now = timestamp();
     dt = dt + Math.min(1, (now - last) / 1000);
