@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.game = game;
+  window.game.stashedItems = game.stashedItems;
   window.game.stashedItemsPile = game.stashedItemsPile;
 });
 

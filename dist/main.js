@@ -142,13 +142,10 @@ class Game {
     if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
       this.stashedItems.push(this.items[this.fetchedIdx]);
       this.stashedItems = [...new Set(this.stashedItems)];
+      this.stashedItemsPile.push(new stashedItem(this.dimensions));
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
-    }
-
-    for (let i = 0; i < this.stashedItems.length; i++) {
-      this.stashedItemsPile.push(new stashedItem(this.dimensions));
     }
   }
 
@@ -202,9 +199,9 @@ class Game {
       }
     }
 
-    for (let i = 0; i < this.stashedItemsPile.length; i++) {
-      this.stashedItemsPile[i].drawItem(this.ctx);
-    }
+    // for (let i = 0; i < this.stashedItemsPile.length; i++) {
+    //   this.stashedItemsPile[i].drawItem(this.ctx);
+    // }
 
     this.won();
     this.happyCat();
@@ -582,6 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.game = game;
+  window.game.stashedItems = game.stashedItems;
   window.game.stashedItemsPile = game.stashedItemsPile;
 });
 
