@@ -286,7 +286,7 @@ itemImg.src = './dist/assets/images/item.png';
 class Item {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = (this.dimensions.width / 2) * Math.random();
+    this.x = (this.dimensions.width / 2 - 10) * Math.random();
     this.y = this.dimensions.height - 120;
     this.img = itemImg;
   }
