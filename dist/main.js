@@ -274,8 +274,8 @@ module.exports = Human;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  ITEM_WIDTH: 20,
-  ITEM_HEIGHT: 20
+  ITEM_WIDTH: 60,
+  ITEM_HEIGHT: 60
 };
 
 // img attribution
@@ -287,7 +287,7 @@ class Item {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = (this.dimensions.width / 2) * Math.random();
-    this.y = this.dimensions.height - 25;
+    this.y = this.dimensions.height - 120;
     this.img = itemImg;
   }
 
