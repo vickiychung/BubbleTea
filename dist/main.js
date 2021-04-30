@@ -547,16 +547,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    // if (game.lost()) {
-    //   game.angry();
+    if (game.lost()) {
+      game.angry();
       
-    //   gameInstruct.classList.add("hidden");
-    //   playingText.classList.add("hidden");
-    //   wonText.classList.add("hidden");
-    //   gameoverText.classList.remove("hidden");
+      gameInstruct.classList.add("hidden");
+      playingText.classList.add("hidden");
+      wonText.classList.add("hidden");
+      gameoverText.classList.remove("hidden");
 
-    //   return cancelAnimationFrame(loop);
-    // }
+      return cancelAnimationFrame(loop);
+    }
 
     if (game.gameWon) {
       gameInstruct.classList.add("hidden");
@@ -577,13 +577,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
-
-  window.game = game;
-  window.game.stashedItems = game.stashedItems;
-  window.game.stashedItemsPile = game.stashedItemsPile;
 });
 
-console.log("Webpack is working!")
 })();
 
 /******/ })()
