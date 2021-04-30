@@ -52,3 +52,19 @@ The human will turn around from time to time to check on the cat, and the player
 **Day 5**
 (_April 30th, 2021_)
 - Catch up on any unfinished work
+
+## Media Attributions
+**Images**
+- Favicon made by [Freepik](https://www.freepik.com) from [Flaticon](www.flaticon.com) 
+
+- Icons made by [Freepik](https://www.freepik.com) from [Flaticon](www.flaticon.com)
+  - Angry Human
+  - Human
+  - Items (clips)
+  - Sofa
+
+- Icons made by monkik from [Flaticon](www.flaticon.com)
+  - Desk
+
+**Music**
+- Background music ネ・コ・ミ・ミ from [d-elf](https://www.d-elf.com/archives/2077.html)
