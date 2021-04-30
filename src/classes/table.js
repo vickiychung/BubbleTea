@@ -5,8 +5,6 @@ const CONSTANTS = {
 
 const tableImg = new Image();
 tableImg.src = './dist/assets/images/table.png';
-// img attribution
-// <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 class Table {
   constructor(dimensions) {
