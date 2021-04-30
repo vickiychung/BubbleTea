@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     now = timestamp();
-    dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
 
     game.animate(dirCat, pauseCat, dt);
