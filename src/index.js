@@ -120,5 +120,3 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(loop);
   }
 });
-
-console.log("Webpack is working!")

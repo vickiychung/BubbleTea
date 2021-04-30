@@ -101,6 +101,7 @@ const angryHuman = __webpack_require__(/*! ./angryHuman */ "./src/classes/angryH
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
 const Item = __webpack_require__(/*! ./item */ "./src/classes/item.js");
+const stashedItem = __webpack_require__(/*! ./stashedItem */ "./src/classes/stashedItem.js");
 
 class Game {
   constructor(canvas) {
@@ -110,6 +111,7 @@ class Game {
     this.itemsNum = 3;
     this.items = [];
     this.stashedItems = [];
+    this.stashedItemsPile = [];
 
     this.addItems();
     this.play(0);
@@ -140,6 +142,7 @@ class Game {
     if (Math.floor(this.cat.x) === Math.floor(this.sofa.x)) {
       this.stashedItems.push(this.items[this.fetchedIdx]);
       this.stashedItems = [...new Set(this.stashedItems)];
+      this.stashedItemsPile.push(new stashedItem(this.dimensions));
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
@@ -176,14 +179,7 @@ class Game {
 
   angry() {
     this.human = new angryHuman(this.dimensions);
-    this.human.drawHuman(this.ctx);
-  }
-
-  restart() {
-    this.cat = new Cat(this.dimensions);
-    this.human = new Human(this.dimensions);
-    this.sofa = new Sofa(this.dimensions);
-    this.table = new Table(this.dimensions);
+    this.human.drawHuman(this.ctx);[]
   }
 
   animate(dirCat, pauseCat, dt) {
@@ -201,6 +197,10 @@ class Game {
       } else {
         this.items[i].drawItem(this.ctx);
       }
+    }
+
+    for (let i = 0; i < this.stashedItemsPile.length; i++) {
+      this.stashedItemsPile[i].drawItem(this.ctx);
     }
 
     this.won();
@@ -344,6 +344,46 @@ class Sofa {
 }
 
 module.exports = Sofa;
+
+
+/***/ }),
+
+/***/ "./src/classes/stashedItem.js":
+/*!************************************!*\
+  !*** ./src/classes/stashedItem.js ***!
+  \************************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  ITEM_WIDTH: 60,
+  ITEM_HEIGHT: 60
+};
+
+const itemImg = new Image();
+itemImg.src = './dist/assets/images/item.png';
+
+class stashedItem {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = this.getRandInt(this.dimensions.width - 300, this.dimensions.width - 90);
+    this.y = this.dimensions.height - 140;
+    this.img = itemImg;
+  }
+
+  getRandInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  drawItem(ctx) {
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+  }
+}
+
+module.exports = stashedItem;
 
 
 /***/ }),
@@ -539,7 +579,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-console.log("Webpack is working!")
 })();
 
 /******/ })()
