@@ -85,7 +85,7 @@ class Game {
 
   angry() {
     this.human = new angryHuman(this.dimensions);
-    this.human.drawHuman(this.ctx);
+    this.human.drawHuman(this.ctx);[]
   }
 
   animate(dirCat, pauseCat, dt) {
@@ -104,7 +104,7 @@ class Game {
         this.items[i].drawItem(this.ctx);
       }
     }
-    
+
     for (let i = 0; i < this.stashedItemsPile.length; i++) {
       this.stashedItemsPile[i].drawItem(this.ctx);
     }

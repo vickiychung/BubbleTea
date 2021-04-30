@@ -182,7 +182,7 @@ class Game {
 
   angry() {
     this.human = new angryHuman(this.dimensions);
-    this.human.drawHuman(this.ctx);
+    this.human.drawHuman(this.ctx);[]
   }
 
   animate(dirCat, pauseCat, dt) {
@@ -201,7 +201,7 @@ class Game {
         this.items[i].drawItem(this.ctx);
       }
     }
-    
+
     for (let i = 0; i < this.stashedItemsPile.length; i++) {
       this.stashedItemsPile[i].drawItem(this.ctx);
     }
@@ -368,9 +368,15 @@ itemImg.src = './dist/assets/images/item.png';
 class stashedItem {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = (this.dimensions.width) * Math.random();
+    this.x = this.getRandInt(this.dimensions.width - 20, this.dimensions.width - 300);
     this.y = this.dimensions.height - 120;
     this.img = itemImg;
+  }
+
+  getRandInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   drawItem(ctx) {
