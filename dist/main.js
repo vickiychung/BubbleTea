@@ -8,8 +8,8 @@
 /***/ ((module) => {
 
 const CONSTANTS = {
-  HUMAN_WIDTH: 30,
-  HUMAN_HEIGHT: 35
+  HUMAN_WIDTH: 110,
+  HUMAN_HEIGHT: 130
 };
 
 const angryHumanImg = new Image();
@@ -20,8 +20,8 @@ angryHumanImg.src = './dist/assets/images/angryHuman.png';
 class angryHuman {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 10;
-    this.y = dimensions.height / 2 - 10;
+    this.x = 40;
+    this.y = dimensions.height / 2 - 50;
     this.img = angryHumanImg;
     this.status = "angry";
   }
@@ -45,8 +45,8 @@ module.exports = angryHuman;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  CAT_WIDTH: 30,
-  CAT_HEIGHT: 25
+  CAT_WIDTH: 100,
+  CAT_HEIGHT: 110
 };
 
 const catImg = new Image();
@@ -59,7 +59,7 @@ class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
-    this.y = this.dimensions.height - 40;
+    this.y = this.dimensions.height - 180;
     this.img = catImg;
   }
 
@@ -222,8 +222,8 @@ module.exports = Game;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  HUMAN_WIDTH: 30,
-  HUMAN_HEIGHT: 35
+  HUMAN_WIDTH: 110,
+  HUMAN_HEIGHT: 130
 };
 
 const humanImg = new Image();
@@ -237,8 +237,8 @@ checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 13;
-    this.y = dimensions.height / 2 - 10;
+    this.x = 40;
+    this.y = dimensions.height / 2 - 50;
     this.img = humanImg;
     this.status = "working";
   }
@@ -274,8 +274,8 @@ module.exports = Human;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  ITEM_WIDTH: 20,
-  ITEM_HEIGHT: 20
+  ITEM_WIDTH: 60,
+  ITEM_HEIGHT: 60
 };
 
 // img attribution
@@ -286,8 +286,8 @@ itemImg.src = './dist/assets/images/item.png';
 class Item {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = (this.dimensions.width / 2) * Math.random();
-    this.y = this.dimensions.height - 25;
+    this.x = (this.dimensions.width / 2 - 10) * Math.random();
+    this.y = this.dimensions.height - 120;
     this.img = itemImg;
   }
 
@@ -319,8 +319,8 @@ module.exports = Item;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  SOFA_WIDTH: 80,
-  SOFA_HEIGHT: 100
+  SOFA_WIDTH: 300,
+  SOFA_HEIGHT: 380
 };
 
 const sofaImg = new Image();
@@ -332,8 +332,8 @@ sofaImg.src = './dist/assets/images/sofa.png'
 class Sofa {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH - 3;
-    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT - 5;
+    this.x = this.dimensions.width - CONSTANTS.SOFA_WIDTH - 20;
+    this.y = this.dimensions.height - CONSTANTS.SOFA_HEIGHT - 10;
   }
 
   drawSofa(ctx) {
@@ -355,8 +355,8 @@ module.exports = Sofa;
 /***/ ((module) => {
 
 const CONSTANTS = {
-  TABLE_WIDTH: 50,
-  TABLE_HEIGHT: 50
+  TABLE_WIDTH: 180,
+  TABLE_HEIGHT: 200
 };
 
 const tableImg = new Image();
@@ -367,7 +367,7 @@ tableImg.src = './dist/assets/images/table.png';
 class Table {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 3;
+    this.x = 10;
     this.y = this.dimensions.height / 6;
   }
 
@@ -436,12 +436,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const wonText = document.getElementById("won-text");
 
   leftButton.addEventListener("mousedown", e => {
-    dirCat = -0.3;
+    dirCat = -1;
     pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dirCat = 0.3;
+    dirCat = 1;
     pauseCat = !pauseCat;
   });
 

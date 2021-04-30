@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  CAT_WIDTH: 30,
-  CAT_HEIGHT: 25
+  CAT_WIDTH: 100,
+  CAT_HEIGHT: 110
 };
 
 const catImg = new Image();
@@ -13,7 +13,7 @@ class Cat {
   constructor(dimensions) {
     this.dimensions = dimensions;
     this.x = this.dimensions.width / 2;
-    this.y = this.dimensions.height - 40;
+    this.y = this.dimensions.height - 180;
     this.img = catImg;
   }
 

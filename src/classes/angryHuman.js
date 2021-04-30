@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  HUMAN_WIDTH: 30,
-  HUMAN_HEIGHT: 35
+  HUMAN_WIDTH: 110,
+  HUMAN_HEIGHT: 130
 };
 
 const angryHumanImg = new Image();
@@ -11,8 +11,8 @@ angryHumanImg.src = './dist/assets/images/angryHuman.png';
 class angryHuman {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 10;
-    this.y = dimensions.height / 2 - 10;
+    this.x = 40;
+    this.y = dimensions.height / 2 - 50;
     this.img = angryHumanImg;
     this.status = "angry";
   }
