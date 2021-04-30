@@ -25,6 +25,10 @@ header {
   align-items: flex-end;
 }
 
+.fa {
+  font-size: 25px;
+}
+
 header p {
   margin-left: auto;
 }
