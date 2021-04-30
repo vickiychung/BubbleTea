@@ -425,6 +425,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   requestAnimationFrame(loop);
 
+  const musicControls = document.getElementById("music-controls");
+  const musicPlay = document.getElementById("music-play");
+  const musicPause = document.getElementById("music-pause");
+  const music = document.getElementById("music");
+
   const leftButton = document.getElementById("left-button");
   const rightButton = document.getElementById("right-button");
   const pauseButton = document.getElementById("pause-button");
@@ -434,6 +439,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const playingText = document.getElementById("playing-text");
   const gameoverText = document.getElementById("gameover-text");
   const wonText = document.getElementById("won-text");
+
+  musicControls.addEventListener("click", e => {
+    if (music.paused) {
+      music.play();
+      musicPlay.classList.add("hidden");
+      musicPause.classList.remove("hidden");
+    } else {
+      music.pause();
+      musicPause.classList.add("hidden");
+      musicPlay.classList.remove("hidden");
+    }
+  })
 
   leftButton.addEventListener("mousedown", e => {
     dirCat = -1;

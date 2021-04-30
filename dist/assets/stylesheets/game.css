@@ -25,6 +25,11 @@ header {
   align-items: flex-end;
 }
 
+#music-controls {
+  font-size: 25px;
+  width: 1%;
+}
+
 header p {
   margin-left: auto;
 }
