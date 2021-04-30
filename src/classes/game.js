@@ -102,9 +102,9 @@ class Game {
       }
     }
 
-    // for (let i = 0; i < this.stashedItemsPile.length; i++) {
-    //   this.stashedItemsPile[i].drawItem(this.ctx);
-    // }
+    for (let i = 0; i < this.stashedItemsPile.length; i++) {
+      this.stashedItemsPile[i].drawItem(this.ctx);
+    }
 
     this.won();
     this.happyCat();
