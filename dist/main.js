@@ -365,8 +365,8 @@ itemImg.src = './dist/assets/images/item.png';
 class stashedItem {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = this.getRandInt(this.dimensions.width - 20, this.dimensions.width - 300);
-    this.y = this.dimensions.height - 120;
+    this.x = this.getRandInt(this.dimensions.width - 300, this.dimensions.width - 90);
+    this.y = this.dimensions.height - 140;
     this.img = itemImg;
   }
 
