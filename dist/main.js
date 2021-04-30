@@ -101,6 +101,7 @@ const angryHuman = __webpack_require__(/*! ./angryHuman */ "./src/classes/angryH
 const Sofa = __webpack_require__(/*! ./sofa */ "./src/classes/sofa.js");
 const Table = __webpack_require__(/*! ./table */ "./src/classes/table.js");
 const Item = __webpack_require__(/*! ./item */ "./src/classes/item.js");
+const stashedItem = __webpack_require__(/*! ./stashedItem */ "./src/classes/stashedItem.js");
 
 class Game {
   constructor(canvas) {
@@ -110,6 +111,7 @@ class Game {
     this.itemsNum = 3;
     this.items = [];
     this.stashedItems = [];
+    this.stashedItemsPile = [];
 
     this.addItems();
     this.play(0);
@@ -143,6 +145,10 @@ class Game {
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
+    }
+
+    for (let i = 0; i < this.stashedItems.length; i++) {
+      this.stashedItemsPile.push(new stashedItem(this.dimensions));
     }
   }
 
@@ -179,13 +185,6 @@ class Game {
     this.human.drawHuman(this.ctx);
   }
 
-  restart() {
-    this.cat = new Cat(this.dimensions);
-    this.human = new Human(this.dimensions);
-    this.sofa = new Sofa(this.dimensions);
-    this.table = new Table(this.dimensions);
-  }
-
   animate(dirCat, pauseCat, dt) {
     this.pauseCat = pauseCat;
 
@@ -201,6 +200,10 @@ class Game {
       } else {
         this.items[i].drawItem(this.ctx);
       }
+    }
+    
+    for (let i = 0; i < this.stashedItemsPile.length; i++) {
+      this.stashedItemsPile[i].drawItem(this.ctx);
     }
 
     this.won();
@@ -344,6 +347,40 @@ class Sofa {
 }
 
 module.exports = Sofa;
+
+
+/***/ }),
+
+/***/ "./src/classes/stashedItem.js":
+/*!************************************!*\
+  !*** ./src/classes/stashedItem.js ***!
+  \************************************/
+/***/ ((module) => {
+
+const CONSTANTS = {
+  ITEM_WIDTH: 60,
+  ITEM_HEIGHT: 60
+};
+
+const itemImg = new Image();
+itemImg.src = './dist/assets/images/item.png';
+
+class stashedItem {
+  constructor(dimensions) {
+    this.dimensions = dimensions;
+    this.x = (this.dimensions.width) * Math.random();
+    this.y = this.dimensions.height - 120;
+    this.img = itemImg;
+  }
+
+  drawItem(ctx) {
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+    ctx.drawImage(this.img, this.x, this.y, CONSTANTS.ITEM_WIDTH, CONSTANTS.ITEM_HEIGHT);
+  }
+}
+
+module.exports = stashedItem;
 
 
 /***/ }),
@@ -507,16 +544,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return cancelAnimationFrame(loop);
     }
 
-    if (game.lost()) {
-      game.angry();
+    // if (game.lost()) {
+    //   game.angry();
       
-      gameInstruct.classList.add("hidden");
-      playingText.classList.add("hidden");
-      wonText.classList.add("hidden");
-      gameoverText.classList.remove("hidden");
+    //   gameInstruct.classList.add("hidden");
+    //   playingText.classList.add("hidden");
+    //   wonText.classList.add("hidden");
+    //   gameoverText.classList.remove("hidden");
 
-      return cancelAnimationFrame(loop);
-    }
+    //   return cancelAnimationFrame(loop);
+    // }
 
     if (game.gameWon) {
       gameInstruct.classList.add("hidden");
@@ -537,6 +574,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(loop);
   }
+
+  window.game = game;
+  window.game.stashedItemsPile = game.stashedItemsPile;
 });
 
 console.log("Webpack is working!")

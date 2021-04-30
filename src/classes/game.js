@@ -4,6 +4,7 @@ const angryHuman = require('./angryHuman');
 const Sofa = require("./sofa");
 const Table = require("./table");
 const Item = require("./item");
+const stashedItem = require("./stashedItem");
 
 class Game {
   constructor(canvas) {
@@ -13,6 +14,7 @@ class Game {
     this.itemsNum = 3;
     this.items = [];
     this.stashedItems = [];
+    this.stashedItemsPile = [];
 
     this.addItems();
     this.play(0);
@@ -46,6 +48,10 @@ class Game {
 
       this.items.splice(this.fetchedIdx, 1);
       this.fetchedIdx = null;
+    }
+
+    for (let i = 0; i < this.stashedItems.length; i++) {
+      this.stashedItemsPile.push(new stashedItem(this.dimensions));
     }
   }
 
@@ -82,13 +88,6 @@ class Game {
     this.human.drawHuman(this.ctx);
   }
 
-  restart() {
-    this.cat = new Cat(this.dimensions);
-    this.human = new Human(this.dimensions);
-    this.sofa = new Sofa(this.dimensions);
-    this.table = new Table(this.dimensions);
-  }
-
   animate(dirCat, pauseCat, dt) {
     this.pauseCat = pauseCat;
 
@@ -104,6 +103,10 @@ class Game {
       } else {
         this.items[i].drawItem(this.ctx);
       }
+    }
+    
+    for (let i = 0; i < this.stashedItemsPile.length; i++) {
+      this.stashedItemsPile[i].drawItem(this.ctx);
     }
 
     this.won();

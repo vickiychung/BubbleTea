@@ -9,7 +9,7 @@ itemImg.src = './dist/assets/images/item.png';
 class stashedItem {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = (this.dimensions.width - CONSTANTS.SOFA_WIDTH - 20) * Math.random();
+    this.x = (this.dimensions.width) * Math.random();
     this.y = this.dimensions.height - 120;
     this.img = itemImg;
   }
