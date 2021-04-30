@@ -1,9 +1,7 @@
 # Naughty Paw
 
-[Live App](https://vickiychung.github.io/NaughtyPaw/)
-
 ## Overview
-Naughty Paw is a simple game inspired by the frequent mischeivous acts of my roommates' cats, as well as a small web game of similar idea during my childhood.
+[Naughty Paw](https://vickiychung.github.io/NaughtyPaw/) is a simple game inspired by the frequent mischeivous acts of my roommates' cats, as well as a small web game of similar idea during my childhood.
 
 In the game, there are some items scattered on the table, and the cat will steal each of them and stash them under the sofa while the human is working.
 The human will turn around from time to time to check on the cat, and the player loses if the cat gets caught. If the cat successfully stashes everything, the player wins.
