@@ -155,7 +155,11 @@ class Game {
   }
 
   lost() {
-    return (!this.pauseCat && this.human.status === "checking");
+    return (
+      !this.pauseCat && 
+      Number.isInteger(this.fetchedIdx) && 
+      this.human.status === "checking"
+    );
   }
 
   won() {
