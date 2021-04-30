@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const wonText = document.getElementById("won-text");
 
   leftButton.addEventListener("mousedown", e => {
-    dirCat = -0.3;
+    dirCat = -1;
     pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dirCat = 0.3;
+    dirCat = 1;
     pauseCat = !pauseCat;
   });
 
