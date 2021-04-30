@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  HUMAN_WIDTH: 30,
-  HUMAN_HEIGHT: 35
+  HUMAN_WIDTH: 110,
+  HUMAN_HEIGHT: 130
 };
 
 const humanImg = new Image();
@@ -14,8 +14,8 @@ checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
 class Human {
   constructor(dimensions) {
     this.dimensions = dimensions;
-    this.x = 13;
-    this.y = dimensions.height / 2 - 10;
+    this.x = 40;
+    this.y = dimensions.height / 2 - 50;
     this.img = humanImg;
     this.status = "working";
   }
