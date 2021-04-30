@@ -14,8 +14,6 @@ const CONSTANTS = {
 
 const angryHumanImg = new Image();
 angryHumanImg.src = './dist/assets/images/angryHuman.png';
-// img attribution
-// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 class angryHuman {
   constructor(dimensions) {
@@ -231,8 +229,6 @@ humanImg.src = './dist/assets/images/human.png';
 
 const checkingHumanImg = new Image();
 checkingHumanImg.src = './dist/assets/images/checkingHuman.png';
-// img attribution
-// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 class Human {
   constructor(dimensions) {
@@ -245,7 +241,8 @@ class Human {
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-    if (Math.floor(dt * 1000) === 23) {
+    
+    if (dt * 1000 === 23) {
       this.moveHuman();
     } 
   }
@@ -278,8 +275,6 @@ const CONSTANTS = {
   ITEM_HEIGHT: 60
 };
 
-// img attribution
-// <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 const itemImg = new Image();
 itemImg.src = './dist/assets/images/item.png';
 
@@ -325,9 +320,6 @@ const CONSTANTS = {
 
 const sofaImg = new Image();
 sofaImg.src = './dist/assets/images/sofa.png'
-
-// img attribution
-// Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 class Sofa {
   constructor(dimensions) {
@@ -401,8 +393,6 @@ const CONSTANTS = {
 
 const tableImg = new Image();
 tableImg.src = './dist/assets/images/table.png';
-// img attribution
-// <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 class Table {
   constructor(dimensions) {
@@ -568,7 +558,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     now = timestamp();
-    dt = dt + Math.min(1, (now - last) / 1000);
     dt = (now - last) / 1000;
 
     game.animate(dirCat, pauseCat, dt);
