@@ -6,6 +6,8 @@
 In the game, there are some items scattered around, and the cat will steal each of them and stash them under the sofa while the human is working.
 The human will turn around from time to time to check on the cat, and the player loses if the cat gets caught. If the cat successfully stashes everything, the player wins.
 
+<img width="1060" alt="image" src="https://user-images.githubusercontent.com/72854605/116833278-3beb6680-ab6d-11eb-8b92-973a5c4282db.png">
+
 ## List of MVPs
 - [ ] **Cat and human movements**
     - [ ] Cat moving between table and sofa. 
