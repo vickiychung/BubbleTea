@@ -488,11 +488,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switch(e.code) {
       case "ArrowLeft":
-        dirCat = -2;
+        dirCat = -1.3;
         pauseCat = !pauseCat;
         break;
       case "ArrowRight":
-        dirCat = 2;
+        dirCat = 1.3;
         pauseCat = !pauseCat;
         break;
       case "KeyR":
@@ -527,12 +527,12 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   leftButton.addEventListener("mousedown", e => {
-    dirCat = -2;
+    dirCat = -1.3;
     pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dirCat = 2;
+    dirCat = 1.3;
     pauseCat = !pauseCat;
   });
 
