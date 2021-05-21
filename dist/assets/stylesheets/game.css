@@ -78,11 +78,21 @@ a {
 .game-buttons-wrapper, .cat-buttons-wrapper {
   width: 300px;
   margin-top: 12px;
-
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.game-buttons-wrapper span, .cat-buttons-wrapper span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(87, 84, 84);
+  font-family: 'Comfortaa', cursive;
+  font-size: 13px;
+  text-transform: lowercase;
 }
 
 button {
@@ -96,6 +106,7 @@ button {
   border-width: 2px;
   border-radius: 10px;
   padding: 8px;
+  margin-bottom: 8px;
 }
 
 .game-text-wrapper {
