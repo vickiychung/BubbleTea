@@ -35,9 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   document.addEventListener("keydown", e => {
-    if (e.keyCode === 37) {
-      dirCat = -2;
-      pauseCat = !pauseCat;
+    if (e.defaultPrevented) return;
+    e.preventDefault();
+
+    switch(e.code) {
+      case "ArrowLeft":
+        dirCat = -2;
+        pauseCat = !pauseCat;
+        break;
+      // case "ArrowRight": 
+
     }
   })
 
