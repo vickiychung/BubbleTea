@@ -43,8 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         dirCat = -2;
         pauseCat = !pauseCat;
         break;
-      // case "ArrowRight": 
-
+      case "ArrowRight":
+        dirCat = 2;
+        pauseCat = !pauseCat;
+        break;
     }
   })
 

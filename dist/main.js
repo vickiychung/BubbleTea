@@ -113,27 +113,7 @@ class Game {
 
     this.addItems();
     this.play(0);
-
-    // this.keyListeners();
-    // this.keydown = this.keydown.bind(this);
   }
-
-  // keyListeners() {
-  //   document.addEventListener("keydown", this.keydown);
-  // }
-
-  // removeKeyListeners(){
-  //   document.removeEventListener("keydown", this.keydown);
-  // }
-
-  // keydown(e) {
-  //   // left 37
-  //   // right 39
-  //   console.log(e.keyCode)
-  //   if (e.keyCode === 37) {
-  //     this.animate(-2, true);
-  //   }
-  // }
 
   addItems() {
     for (let i = 0; i < this.itemsNum; i++) {
@@ -511,8 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {
         dirCat = -2;
         pauseCat = !pauseCat;
         break;
-      // case "ArrowRight": 
-
+      case "ArrowRight":
+        dirCat = 2;
+        pauseCat = !pauseCat;
+        break;
     }
   })
 
