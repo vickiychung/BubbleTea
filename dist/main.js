@@ -483,12 +483,12 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   leftButton.addEventListener("mousedown", e => {
-    dirCat = -1;
+    dirCat = -2;
     pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dirCat = 1;
+    dirCat = 2;
     pauseCat = !pauseCat;
   });
 
