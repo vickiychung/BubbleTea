@@ -495,6 +495,17 @@ document.addEventListener("DOMContentLoaded", () => {
         dirCat = 2;
         pauseCat = !pauseCat;
         break;
+      case "KeyR":
+        gameoverText.classList.add("hidden");
+        playingText.classList.add("hidden");
+        wonText.classList.add("hidden");
+        gameInstruct.classList.remove("hidden");
+
+        dirCat = 0;
+        pauseCat = true;
+        pauseGame = true;
+        game = new Game(canvas);
+        break;
       case "Space":
         pauseGame = !pauseGame;
 
@@ -509,6 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
           wonText.classList.add("hidden");
           gameInstruct.classList.remove("hidden");
         }
+        
         loop();
         break;
     }
