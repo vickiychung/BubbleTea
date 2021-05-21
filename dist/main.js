@@ -495,6 +495,22 @@ document.addEventListener("DOMContentLoaded", () => {
         dirCat = 2;
         pauseCat = !pauseCat;
         break;
+      case "Space":
+        pauseGame = !pauseGame;
+
+        if (!pauseGame) {
+          gameInstruct.classList.add("hidden");
+          gameoverText.classList.add("hidden");
+          wonText.classList.add("hidden");
+          playingText.classList.remove("hidden");
+        } else {
+          playingText.classList.add("hidden");
+          gameoverText.classList.add("hidden");
+          wonText.classList.add("hidden");
+          gameInstruct.classList.remove("hidden");
+        }
+        loop();
+        break;
     }
   })
 
