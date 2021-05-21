@@ -34,13 +34,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  document.addEventListener("keydown", e => {
+    if (e.defaultPrevented) return;
+    e.preventDefault();
+
+    switch(e.code) {
+      case "ArrowLeft":
+        dirCat = -2;
+        pauseCat = !pauseCat;
+        break;
+      case "ArrowRight":
+        dirCat = 2;
+        pauseCat = !pauseCat;
+        break;
+      case "KeyR":
+        gameoverText.classList.add("hidden");
+        playingText.classList.add("hidden");
+        wonText.classList.add("hidden");
+        gameInstruct.classList.remove("hidden");
+
+        dirCat = 0;
+        pauseCat = true;
+        pauseGame = true;
+        game = new Game(canvas);
+        break;
+      case "Space":
+        pauseGame = !pauseGame;
+
+        if (!pauseGame) {
+          gameInstruct.classList.add("hidden");
+          gameoverText.classList.add("hidden");
+          wonText.classList.add("hidden");
+          playingText.classList.remove("hidden");
+        } else {
+          playingText.classList.add("hidden");
+          gameoverText.classList.add("hidden");
+          wonText.classList.add("hidden");
+          gameInstruct.classList.remove("hidden");
+        }
+        
+        loop();
+        break;
+    }
+  })
+
   leftButton.addEventListener("mousedown", e => {
-    dirCat = -1;
+    dirCat = -2;
     pauseCat = !pauseCat;
   });
 
   rightButton.addEventListener("mousedown", e => {
-    dirCat = 1;
+    dirCat = 2;
     pauseCat = !pauseCat;
   });
 
