@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  document.addEventListener("keydown", e => {
+    if (e.keyCode === 37) {
+      dirCat = -2;
+      pauseCat = !pauseCat;
+    }
+  })
+
   leftButton.addEventListener("mousedown", e => {
     dirCat = -2;
     pauseCat = !pauseCat;
