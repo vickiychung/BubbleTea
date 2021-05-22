@@ -123,8 +123,8 @@ class Game {
 
   stealItem() {
     for (let i = 0; i < this.items.length; i++) {
-      if (Math.floor(this.cat.x) - Math.floor(this.items[i]["x"]) >= 1 &&
-        Math.floor(this.cat.x) - Math.floor(this.items[i]["x"]) <= 1.5) {
+      if (Math.floor(this.cat.x) - Math.floor(this.items[i]["x"]) >= 0 &&
+        Math.floor(this.cat.x) - Math.floor(this.items[i]["x"]) <= 1.3) {
           this.fetchItem(i);
       }
     }
