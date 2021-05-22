@@ -76,7 +76,7 @@ a {
 }
 
 .game-buttons-wrapper, .cat-buttons-wrapper {
-  width: 300px;
+  width: 270px;
   margin-top: 12px;
   display: flex;
   flex-direction: row;
@@ -112,9 +112,7 @@ button {
 .game-text-wrapper {
   font-size: 17px;
   line-height: 1.5;
-  padding-left: 5px;
   padding-right: 5px;
-
   display: flex;
   align-items: center;
 }
