@@ -242,8 +242,8 @@ class Human {
 
   animate(ctx, dt) {
     this.drawHuman(ctx);
-    
-    if (dt * 1000 === 23) {
+
+    if (dt * 1000 >= 19 && dt * 1000 <= 20) {
       this.moveHuman();
     } 
   }
@@ -603,6 +603,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     now = timestamp();
+    
     dt = (now - last) / 1000;
 
     game.animate(dirCat, pauseCat, dt);
