@@ -474,12 +474,12 @@ document.addEventListener("DOMContentLoaded", () => {
   musicControls.addEventListener("click", e => {
     if (music.paused) {
       music.play();
-      musicPlay.classList.add("hidden");
-      musicPause.classList.remove("hidden");
+      musicPlay.classList.remove("hidden");
+      musicPause.classList.add("hidden");
     } else {
       music.pause();
-      musicPause.classList.add("hidden");
-      musicPlay.classList.remove("hidden");
+      musicPause.classList.remove("hidden");
+      musicPlay.classList.add("hidden");
     }
   })
 
